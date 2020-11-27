@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+    #RewriteRule  ^([a-z0-9\-_]+).html$  index.php?controller=home&action=index
+  #RewriteRule  ^([a-z0-9\-_]+).html$  index.php?controller=index&action=index
+  #RewriteRule  ^([a-z0-9\-_]+).html$/^([a-z0-9\-_]+).html$  index.php?controller=index&action=logout
+
+</IfModule>
