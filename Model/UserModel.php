@@ -151,6 +151,81 @@ public function change_phone_profile_user($paramas,$id){
     public function delete(){
         return __METHOD__;
     }
+
+
+
+    //Select user_order theo id
+    public function  Select_id_user_order($id_user,$id_product){
+        $conn = $this->conn();
+        $select = "SELECT * FROM `user_order` WHERE id_user =$id_user AND id_product = $id_product";
+        $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result &&  $result->num_rows >0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {  
+                // echo "<pre>";
+                // var_dump($row);
+                $data[] = $row;
+            }
+            return $data;
+          } else {
+                return $data =[
+                    "user_null_oder" =>"Sản phẩm chưa có trong giỏ!"
+                ];
+          }  
+
+    }  
+    //thêm vào user_order
+    public function  add_user_order($id_user,$id_product,$quantily){
+        $conn = $this->conn();
+        $select = "INSERT INTO `user_order`(`id_user`, `id_product`, `amount_user_oder`) VALUES ($id_user,$id_product,$quantily)";
+        $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result >0) {
+                $data =[
+                    "user_oder" =>"đã thêm vào giỏ"];
+            return $data;
+          } else {
+                return $data =[
+                    "Error" =>"lỗi"
+                ];
+          }  
+
+    }   
+        //update lại vào user_order
+    public function update_user_order($id_user,$id_product,$quantily){
+        $conn = $this->conn();
+        $select = "UPDATE `user_order` SET `amount_user_oder`= $quantily WHERE `id_user`= $id_user AND `id_product`= $id_product";
+        $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result >0) {
+                $data =[
+                    "user_oder" =>"đã thêm vào giỏ"];
+            return $data;
+          } else {
+                return $data =[
+                    "Error" =>"lỗi"
+                ];
+          }  
+
+    }   
+    // xóa theo id sản phẩm trong user_cart
+    public function delete_id_product_user_order($id_user,$id_product){
+            $conn = $this->conn();
+            $select = "DELETE FROM `user_order` WHERE id_user = $id_user AND id_product = $id_product ";
+            $result = mysqli_query($conn,$select);
+        //  $data = [];
+            if ( $result >0) {
+                    $data =[
+                        "user_oder" =>"xóa thành công"];
+                return $data;
+              } else {
+                    return $data =[
+                        "Error" =>"lỗi"
+                    ];
+              }  
+
+        }
     
     
 }
