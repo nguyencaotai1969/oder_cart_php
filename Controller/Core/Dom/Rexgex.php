@@ -36,6 +36,9 @@ class Rexgex{
     public static function regex_number($string){
         return preg_match('/[^0-9*]+/',$string);
     }
+    public static function regex_username_login($string){
+       return preg_match('/[^A-z0-9*@.]+/',$string); 
+    }
     public static function regex_text($string){
         return preg_match('/[^a-zA-z*]+/',$string);
     }

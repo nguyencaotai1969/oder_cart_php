@@ -35,6 +35,22 @@ public function check_email_isset_regiter($email){
                     $kt=mysqli_query($conn, $sql);
                         return mysqli_num_rows($kt);
                   }
+   public function user_profile($id_user){
+       $conn = $this->conn();
+    $select = "SELECT full_name,Phone,email,img FROM user where user.id =$id_user";
+    $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result &&  $result->num_rows >0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {  
+                // echo "<pre>";
+                // var_dump($row);
+                $data[] = $row;
+            }
+            return $data;
+          }    
+         
+   }
    
 public function user_Oder($id_user){
     $conn = $this->conn();
@@ -56,7 +72,37 @@ public function user_Oder($id_user){
           }     
          
 }
+public function change_email_profile_user($paramas,$id){
+             $conn = $this->conn();
+        $UPDATE = "UPDATE `user` SET `email` = '{$paramas['email']}' WHERE `user`.`id` = {$id['id']}";
+         $conn->query($UPDATE) === true;
+}
+public function change_phone_profile_user($paramas,$id){
+                 $conn = $this->conn();
 
+     $UPDATE = "UPDATE `user` SET `Phone`='{$paramas['phone']}'
+     WHERE `user`.`id` = {$id['id']}";
+             $conn->query($UPDATE) === true;
+
+}
+    public function change_phone_password_user($paramas,$id){
+                    $conn = $this->conn();
+
+        $UPDATE = "UPDATE `user` SET `password`='{$paramas['passwords']}'
+        WHERE `user`.`id` = {$id['id']}";
+        // echo $UPDATE;
+                $conn->query($UPDATE) === true;
+
+    }
+    public function change_img_user($paramas,$id){
+        $conn = $this->conn();
+
+        $UPDATE = "UPDATE `user` SET `img`='{$paramas['img']}'
+                WHERE `user`.`id` = {$id['id']}";
+        // echo $UPDATE;
+        $conn->query($UPDATE) === true;
+
+    }
     public function getAll(){
         $conn = $this->conn();
         $select = "SELECT * From user";   
