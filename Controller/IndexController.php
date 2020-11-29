@@ -432,5 +432,100 @@ class IndexController extends BaseController
         }
 
     }
+     // select order_user theo id
+    public function select_id_product_order_user(){
+        try {
+            $token = isset($_GET['token'])?$_GET['token']:"";
+            $json = JWT::decode($token, "khoa_token", true);
+            $obj_id_user_oder =  json_decode($json);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+             $data_oders =[]; 
+
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+
+            $check_id_product = $this->userModel->Select_id_user_order($id_user, $id_product,);
+            
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+        
+    }
+    // thêm quantily vào user_order
+    public function search_id_product_order_user(){
+        try {
+            $token = isset($_GET['token'])?$_GET['token']:"";
+            $json = JWT::decode($token, "khoa_token", true);
+            $obj_id_user_oder =  json_decode($json);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+             $data_oders =[]; 
+
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+            $quantily = isset($_GET['quantily'])?$_GET['quantily']:"";
+
+            $check_id_product = $this->userModel->add_user_order($id_user, $id_product,$quantily);
+            
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+        
+    }
+    // update quantily vào user_order
+    public function update_id_product_order_user(){
+        try {
+            $token = isset($_GET['token'])?$_GET['token']:"";
+            $json = JWT::decode($token, "khoa_token", true);
+            $obj_id_user_oder =  json_decode($json);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+             $data_oders =[]; 
+
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+            $quantily = isset($_GET['quantily'])?$_GET['quantily']:"";
+
+            $check_id_product = $this->userModel->update_user_order($id_user, $id_product,$quantily);
+            
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+        
+    }
+    //xóa id_product trong bảng user_order
+    public function delete_id_product_order_user(){
+        try {
+            $token = isset($_GET['token'])?$_GET['token']:"";
+            $json = JWT::decode($token, "khoa_token", true);
+            $obj_id_user_oder =  json_decode($json);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+             $data_oders =[]; 
+
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+        
+            $check_id_product = $this->userModel->delete_id_product_user_order($id_user, $id_product,);
+            
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+        
+    }
+
 
 }
