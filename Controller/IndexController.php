@@ -100,7 +100,7 @@ class IndexController extends BaseController
             $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder = json_decode($json);
-            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
             $data_oders = [];
             echo json_encode($user_data_oder, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
@@ -438,7 +438,7 @@ class IndexController extends BaseController
             $token = isset($_GET['token'])?$_GET['token']:"";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
-            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
              $data_oders =[]; 
 
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
@@ -485,7 +485,7 @@ class IndexController extends BaseController
             $token = isset($_GET['token'])?$_GET['token']:"";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
-            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
              $data_oders =[]; 
 
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
@@ -509,7 +509,7 @@ class IndexController extends BaseController
             $token = isset($_GET['token'])?$_GET['token']:"";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
-            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder );
              $data_oders =[]; 
 
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
