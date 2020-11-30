@@ -444,7 +444,7 @@ class IndexController extends BaseController
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
             $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
 
-            $check_id_product = $this->userModel->Select_id_user_order($id_user, $id_product,);
+            $check_id_product = $this->userModel->Select_id_user_order($id_user, $id_product);
             
             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
 
@@ -515,7 +515,7 @@ class IndexController extends BaseController
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
             $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
         
-            $check_id_product = $this->userModel->delete_id_product_user_order($id_user, $id_product,);
+            $check_id_product = $this->userModel->delete_id_product_user_order($id_user, $id_product);
             
             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
 
