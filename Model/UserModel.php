@@ -16,6 +16,7 @@ class UserModel extends Database{
     }if($result->num_rows == 1){
         $urows  = $result->fetch_assoc();
         if($urows['password']==$paramas['password']){
+                $urows['acl'] = $this->CheckAclDB($urows['gid']);
             return $urows;
 
         }
@@ -141,8 +142,8 @@ public function change_phone_profile_user($paramas,$id){
     }
     public function register($paramas){
         $conn = $this->conn();
-        $insert_sql = "INSERT INTO `user`(`id`,`full_name`,`Phone`,`email`,`username`,`password`,`img`) VALUES
-        (null,'{$paramas['fullname']}','{$paramas['phone']}','{$paramas['email']}','{$paramas['username']}','{$paramas['pass']}',DEFAULT)";
+        $insert_sql = "INSERT INTO `user`(`id`,`full_name`,`Phone`,`email`,`username`,`password`,`img`,`gid`) VALUES
+        (null,'{$paramas['fullname']}','{$paramas['phone']}','{$paramas['email']}','{$paramas['username']}','{$paramas['pass']}',DEFAULT,2)";
          $conn->query($insert_sql) === true;
     } 
     public function finByid($id){
