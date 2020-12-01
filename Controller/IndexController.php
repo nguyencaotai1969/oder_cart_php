@@ -20,18 +20,65 @@ class IndexController extends BaseController
 
         $this->productModel = new ProductModel();
         header('Content-type: application/json');
-
     }
 
-    // public function logout(){
-    //         session_start();
-    //         $datalogin = [];
-    //         $datalogin['user'] = $this->userModel->getLogin($datalogin);
-    //         session_unset();
-    //         session_destroy();
-    //         header("location:?controller=index&action=index");
-    // }
+    public function logout()
+    {
+        session_start();
+        $datalogin = [];
+        $datalogin['user'] = $this->userModel->getLogin($datalogin);
+        session_unset();
+        session_destroy();
+        header("location:?controller=index&action=login");
+    }
+    public function login()
+    {
+        header("Content-Type: text/html");
 
+        $data = [];
+        $datalogin = [];
+        if (isset($_SESSION['username'])) {
+            header("Location:?controller=admin&action=admin");
+        } else {
+            if (isset($_POST['btnsubmit'])) {
+                if ($_POST['username'] == "" || $_POST['password'] == "") {
+                    $data['error'] = "<b style='color:Red'>Thiếu Trường Thông Tin</b>";
+                } else {
+                    $datalogin['username'] = $_POST['username'];
+                    $datalogin['password'] = md5($_POST['password']);
+                    $data_user = $this->userModel->getLogin($datalogin);
+                    if (is_array($data_user)) {
+                        if (preg_match("/^\S+[a-zA-Z]$/", $datalogin['username'])) {
+                            unset($data_user['password']);
+                            $_SESSION['username'] = $data_user;
+                            $_SESSION["login_time_stamp"] = time();
+                            // echo "<pre>";
+                            // var_dump($_SESSION);
+                            if( $_SESSION['username']['gid']==2){
+                                 $data['error'] = "Bạn Không Có Quyền";
+                                 session_unset();
+                                session_destroy();
+                            }else{
+                            header("Location:?controller=admin&action=admin");
+                                
+                            }
+                        } else {
+                            $data['error'] = "Tên Đăng Nhập Chỉ Được Phép Là Chữ";
+                        }
+                    } else {
+                        $data['error'] = "Sai Tài Khoản Hoặc Mật Khẩu";
+                    }
+                }
+            }
+        }
+
+
+        // if(isset($_SESSION['username']['username'])==true){
+        //     header("Location:?controller=facebook&action=index");
+        // }
+        $data['user'] = $this->userModel->getAll();
+        return $this->view("index.index", $data);
+    }
     public function index()
     {
         $data = [];
@@ -40,57 +87,51 @@ class IndexController extends BaseController
         $password = isset($_GET['password']) ? $_GET['password'] : "";
 
         try {
-            if(Rexgex::regex_username_login($username)){
+            if (Rexgex::regex_username_login($username)) {
                 $error['errors'] = "Có Kí Tự Đặc Biệt";
-                    echo json_encode($error);
-
-            }else{
-                 if ($username == "" || $password == "") {
-                $error['errors'] = "Thiếu Trường Thông Tin";
                 echo json_encode($error);
-
             } else {
-
-                $datalogin['username'] = $username;
-                $datalogin['password'] = md5($password);
-                $data_user = $this->userModel->getLogin($datalogin);
-                if (isset($data_user)) {
-
-                    unset($data_user['password']);
-                    $data = json_encode($data_user['id'], JSON_UNESCAPED_UNICODE);
-                    $jsonwebtoken = JWT::encode($data, "khoa_token");
-
-                    $list = [];
-                    // var_dump(data$)
-                    $list_data = [
-                        'sussecfully' => "sussecfully",
-                        'id_user' => $data_user['id'],
-                        'full_name' => $data_user['full_name'],
-                        'username' => $datalogin['username'],
-                        'token' => $jsonwebtoken,
-                    ];
-
-                    array_push($list, $list_data);
-                    echo json_encode($list[0], JSON_NUMERIC_CHECK);
-
-                    // echo json_encode($data_oders);
-                    // encode string jwt
-                    // $jsontk = json_decode($json_decode);
-
-                } else {
-                    $error['errors'] = "Sai Tài Khoản Mật Khẩu";
+                if ($username == "" || $password == "") {
+                    $error['errors'] = "Thiếu Trường Thông Tin";
                     echo json_encode($error);
+                } else {
 
+                    $datalogin['username'] = $username;
+                    $datalogin['password'] = md5($password);
+                    $data_user = $this->userModel->getLogin($datalogin);
+                    if (isset($data_user)) {
+
+                        unset($data_user['password']);
+                        $data = json_encode($data_user['id'], JSON_UNESCAPED_UNICODE);
+                        $jsonwebtoken = JWT::encode($data, "khoa_token");
+
+                        $list = [];
+                        // var_dump(data$)
+                        $list_data = [
+                            'sussecfully' => "sussecfully",
+                            'id_user' => $data_user['id'],
+                            'full_name' => $data_user['full_name'],
+                            'username' => $datalogin['username'],
+                            'token' => $jsonwebtoken,
+                        ];
+
+                        array_push($list, $list_data);
+                        echo json_encode($list[0], JSON_NUMERIC_CHECK);
+
+                        // echo json_encode($data_oders);
+                        // encode string jwt
+                        // $jsontk = json_decode($json_decode);
+
+                    } else {
+                        $error['errors'] = "Sai Tài Khoản Mật Khẩu";
+                        echo json_encode($error);
+                    }
                 }
-
             }
-            }
-           
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Không Hợp Lệ !";
             echo json_encode($error);
         }
-
     }
     //api giai ma token user
     public function user_order_cart()
@@ -107,7 +148,6 @@ class IndexController extends BaseController
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
         }
-
     }
     public function change_profile()
     {
@@ -130,7 +170,6 @@ class IndexController extends BaseController
                             'errors' => "Thiếu Thông Tin",
                         ];
                         echo json_encode($error, JSON_NUMERIC_CHECK);
-
                     } else {
                         if ($this->userModel->check_email_isset_regiter($paramas['email']) > 0) {
                             $error = [
@@ -145,9 +184,7 @@ class IndexController extends BaseController
                                 'sucesfull' => "Đổi Email Thành Công !",
                             ];
                             echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
-
                         }
-
                     }
                 } else {
                     $error = [
@@ -155,9 +192,7 @@ class IndexController extends BaseController
                         'errors' => "Email Không Hợp Lệ",
                     ];
                     echo json_encode($error, JSON_NUMERIC_CHECK);
-
                 }
-
             } else if (isset($_POST['phone']) == true) {
                 $paramas['phone'] = isset($_POST['phone']) ? $_POST['phone'] : "";
 
@@ -167,7 +202,6 @@ class IndexController extends BaseController
                         'errors' => "Thiếu Thông Tin",
                     ];
                     echo json_encode($error, JSON_NUMERIC_CHECK);
-
                 } else {
                     if (Validate::validate_phone_number($paramas['phone']) == false) {
                         $error = [
@@ -189,11 +223,8 @@ class IndexController extends BaseController
                         echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
 
                         $user_data_oder = $this->userModel->change_phone_profile_user($paramas, $id_user);
-
                     }
-
                 }
-
             } else if (isset($_POST['passwords']) == true) {
                 $passwrod = isset($_POST['passwords']) ? $_POST['passwords'] : "";
                 $passwrod2 = isset($_POST['passwords2']) ? $_POST['passwords2'] : "";
@@ -204,7 +235,6 @@ class IndexController extends BaseController
                         'errors' => "Mật Khẩu Phải Lớn Hơn 5 Kí Tự",
                     ];
                     echo json_encode($error, JSON_NUMERIC_CHECK);
-
                 } elseif ($passwrod != $passwrod2) {
                     $error = [
                         1 => 1,
@@ -219,24 +249,20 @@ class IndexController extends BaseController
                     echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
 
                     $user_data_oder = $this->userModel->change_phone_password_user($paramas, $id_user);
-
                 }
-
-            }else if(isset($_POST['upload'])){
-                $img = isset($_POST['upload'])?$_POST['upload']:"";
-                $filename = "img".rand().".jpg";
-                $paramas['img'] ="public/img/".$filename;
-               echo file_put_contents("../public/img/".$filename,base64_decode($img));
+            } else if (isset($_POST['upload'])) {
+                $img = isset($_POST['upload']) ? $_POST['upload'] : "";
+                $filename = "img" . rand() . ".jpg";
+                $paramas['img'] = "img/" . $filename;
+                echo file_put_contents("../public/img/" . $filename, base64_decode($img));
                 $user_data_oder = $this->userModel->change_img_user($paramas, $id_user);
-                if($user_data_oder==false){
-                            $sucesfull = [
+                if ($user_data_oder == false) {
+                    $sucesfull = [
                         1 => 2,
                         'sucesfull' => "Up Ảnh Thành Công !",
                     ];
                     echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
                 }
-                  
-                
             }
 
             // $data_oders =[];
@@ -342,7 +368,28 @@ class IndexController extends BaseController
         $product_new = $this->productModel->product_new($start, $limit);
 
         echo json_encode($product_new, JSON_NUMERIC_CHECK);
+    }
+    public function product_host()
+    {
+        $total_records = $this->productModel->count_total_records();
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limit = 20;
+        // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+        // tổng số trang
+        $total_page = ceil($total_records / $limit);
 
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($current_page > $total_page) {
+            $current_page = $total_page;
+        } else if ($current_page < 1) {
+            $current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($current_page - 1) * $limit;
+        $product_host = $this->productModel->product_host($start, $limit);
+
+        echo json_encode($product_host, JSON_NUMERIC_CHECK);
     }
     public function all_product()
     {
@@ -371,6 +418,29 @@ class IndexController extends BaseController
         $search = isset($_GET['search']) ? $_GET['search'] : "";
         // addslashes($search);
         echo json_encode($this->productModel->search($search), JSON_NUMERIC_CHECK);
+    }
+    // san pham giam gia 
+    public function product_sale()
+    {
+        $total_records = $this->productModel->count_total_records();
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limit = 20;
+        // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+        // tổng số trang
+        $total_page = ceil($total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($current_page > $total_page) {
+            $current_page = $total_page;
+        } else if ($current_page < 1) {
+            $current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($current_page - 1) * $limit;
+        $product_sale = $this->productModel->product_sale($start, $limit);
+
+        echo json_encode($product_sale, JSON_NUMERIC_CHECK);
     }
     // dang ki
     public function register()
@@ -421,111 +491,99 @@ class IndexController extends BaseController
                     ];
                     echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
                 }
-
             } else {
                 $error = [
                     1 => 1,
                     'errors' => "Định Dạng Mail Không Hợp Lệ",
                 ];
-                echo json_encode($error, JSON_NUMERIC_CHECK);}
-
+                echo json_encode($error, JSON_NUMERIC_CHECK);
+            }
         }
-
     }
-     // select order_user theo id
-    public function select_id_product_order_user(){
+    // select order_user theo id
+    public function select_id_product_order_user()
+    {
         try {
-            $token = isset($_GET['token'])?$_GET['token']:"";
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
             $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
-             $data_oders =[]; 
+            $data_oders = [];
 
-            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
-            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+            $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : "";
+            $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
 
             $check_id_product = $this->userModel->Select_id_user_order($id_user, $id_product);
-            
-            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
 
-            
+            echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
         }
-        
     }
     // thêm quantily vào user_order
-    public function search_id_product_order_user(){
+    public function search_id_product_order_user()
+    {
         try {
-            $token = isset($_GET['token'])?$_GET['token']:"";
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
             $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder->id);
-             $data_oders =[]; 
+            $data_oders = [];
 
-            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
-            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
-            $quantily = isset($_GET['quantily'])?$_GET['quantily']:"";
+            $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : "";
+            $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
+            $quantily = isset($_GET['quantily']) ? $_GET['quantily'] : "";
 
-            $check_id_product = $this->userModel->add_user_order($id_user, $id_product,$quantily);
-            
-            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+            $check_id_product = $this->userModel->add_user_order($id_user, $id_product, $quantily);
 
-            
+            echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
         }
-        
     }
     // update quantily vào user_order
-    public function update_id_product_order_user(){
+    public function update_id_product_order_user()
+    {
         try {
-            $token = isset($_GET['token'])?$_GET['token']:"";
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
             $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
-             $data_oders =[]; 
+            $data_oders = [];
 
-            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
-            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
-            $quantily = isset($_GET['quantily'])?$_GET['quantily']:"";
+            $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : "";
+            $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
+            $quantily = isset($_GET['quantily']) ? $_GET['quantily'] : "";
 
-            $check_id_product = $this->userModel->update_user_order($id_user, $id_product,$quantily);
-            
-            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
+            $check_id_product = $this->userModel->update_user_order($id_user, $id_product, $quantily);
 
-            
+            echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
         }
-        
     }
     //xóa id_product trong bảng user_order
-    public function delete_id_product_order_user(){
+    public function delete_id_product_order_user()
+    {
         try {
-            $token = isset($_GET['token'])?$_GET['token']:"";
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
-            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder );
-             $data_oders =[]; 
+            $user_data_oder = $this->userModel->user_Oder($obj_id_user_oder);
+            $data_oders = [];
 
-            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
-            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
-        
+            $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : "";
+            $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
+
             $check_id_product = $this->userModel->delete_id_product_user_order($id_user, $id_product);
-            
-            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);      
 
-            
+            echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
         }
-        
     }
-
-
 }

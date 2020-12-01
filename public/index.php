@@ -41,8 +41,6 @@ if(!method_exists($objController,$action)){
 $objController->$action(); // gọi action ra chạy
 // xong phần điều hướng action
 
-// var_dump($controller);
-// var_dump($action);
 
 ?>
 
