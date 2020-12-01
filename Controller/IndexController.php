@@ -504,6 +504,7 @@ class IndexController extends BaseController
     public function select_id_product_order_user()
     {
         try {
+<<<<<<< HEAD
             $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
@@ -516,8 +517,19 @@ class IndexController extends BaseController
             $check_id_product = $this->userModel->Select_id_user_order($id_user, $id_product);
 
             echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+=======
+            
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+            $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+
+
+            $check_id_product = $this->userModel->Select_id_user_order($id_user,$id_product);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+>>>>>>> c37c5424fb888eed732a646c2b18f6ed40fbca74
         } catch (Exception $e) {
-            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
     }
@@ -525,6 +537,7 @@ class IndexController extends BaseController
     public function search_id_product_order_user()
     {
         try {
+<<<<<<< HEAD
             $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
@@ -536,13 +549,32 @@ class IndexController extends BaseController
             $quantily = isset($_GET['quantily']) ? $_GET['quantily'] : "";
 
             $check_id_product = $this->userModel->add_user_order($id_user, $id_product, $quantily);
+=======
+    
+            $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+            $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+            $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
+
+
+            if ($id_user == "" || $id_product == "" || $quantily == "") {
+                $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
+                echo json_encode($errorNull);
+            } else {
+                $paramas['id_user'] = $id_user;
+                    $paramas['id_product'] = $id_product;
+                    $paramas['quantily'] = $quantily;
+               $check_id_product = $this->userModel->add_user_order($paramas);
+                echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+            }     
+>>>>>>> c37c5424fb888eed732a646c2b18f6ed40fbca74
 
             echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
         } catch (Exception $e) {
-            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
     }
+<<<<<<< HEAD
     // update quantily vào user_order
     public function update_id_product_order_user()
     {
@@ -560,8 +592,30 @@ class IndexController extends BaseController
             $check_id_product = $this->userModel->update_user_order($id_user, $id_product, $quantily);
 
             echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+=======
+    // update quantily vào user_order theo id_product
+    public function update_id_product_order_user(){
+        try {
+           
+            $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+            $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+            $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
+
+
+            if ($id_user == "" || $id_product == "" || $quantily == "") {
+                $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
+                echo json_encode($errorNull);
+            } else {
+                $paramas['id_user'] = $id_user;
+                    $paramas['id_product'] = $id_product;
+                    $paramas['quantily'] = $quantily;
+               $check_id_product = $this->userModel->update_user_order($paramas);
+                echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+            }   
+
+>>>>>>> c37c5424fb888eed732a646c2b18f6ed40fbca74
         } catch (Exception $e) {
-            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
     }
@@ -569,6 +623,7 @@ class IndexController extends BaseController
     public function delete_id_product_order_user()
     {
         try {
+<<<<<<< HEAD
             $token = isset($_GET['token']) ? $_GET['token'] : "";
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder =  json_decode($json);
@@ -581,8 +636,25 @@ class IndexController extends BaseController
             $check_id_product = $this->userModel->delete_id_product_user_order($id_user, $id_product);
 
             echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+=======
+            
+            $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+            $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+
+             if ($id_user == "" || $id_product == "") {
+                $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
+                echo json_encode($errorNull);
+            } else {
+                $paramas['id_user'] = $id_user;
+                $paramas['id_product'] = $id_product;
+
+               $check_id_product = $this->userModel->delete_id_product_user_order($paramas);
+                echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+            }  
+            
+>>>>>>> c37c5424fb888eed732a646c2b18f6ed40fbca74
         } catch (Exception $e) {
-            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
     }

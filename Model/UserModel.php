@@ -158,7 +158,7 @@ public function change_phone_profile_user($paramas,$id){
     //Select user_order theo id
     public function  Select_id_user_order($id_user,$id_product){
         $conn = $this->conn();
-        $select = "SELECT * FROM `user_order` WHERE id_user =$id_user AND id_product = $id_product";
+        $select = "SELECT * FROM `user_order` WHERE id_user =$id_user AND id_product = $id_product ";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result &&  $result->num_rows >0) {
@@ -177,9 +177,9 @@ public function change_phone_profile_user($paramas,$id){
 
     }  
     //thêm vào user_order
-    public function  add_user_order($id_user,$id_product,$quantily){
+    public function  add_user_order($paramas){
         $conn = $this->conn();
-        $select = "INSERT INTO `user_order`(`id_user`, `id_product`, `amount_user_oder`) VALUES ($id_user,$id_product,$quantily)";
+        $select = "INSERT INTO `user_order`(`id_user`, `id_product`, `amount_user_oder`) VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantily']}')";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result >0) {
@@ -194,9 +194,9 @@ public function change_phone_profile_user($paramas,$id){
 
     }   
         //update lại vào user_order
-    public function update_user_order($id_user,$id_product,$quantily){
+    public function update_user_order($paramas){
         $conn = $this->conn();
-        $select = "UPDATE `user_order` SET `amount_user_oder`= $quantily WHERE `id_user`= $id_user AND `id_product`= $id_product";
+        $select = "UPDATE `user_order` SET `amount_user_oder`= '{$paramas['quantily']}' WHERE `id_user`= '{$paramas['id_user']}' AND `id_product`= '{$paramas['id_product']}' ";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result >0) {
@@ -211,9 +211,9 @@ public function change_phone_profile_user($paramas,$id){
 
     }   
     // xóa theo id sản phẩm trong user_cart
-    public function delete_id_product_user_order($id_user,$id_product){
+    public function delete_id_product_user_order($paramas){
             $conn = $this->conn();
-            $select = "DELETE FROM `user_order` WHERE id_user = $id_user AND id_product = $id_product ";
+            $select = "DELETE FROM `user_order` WHERE id_user = '{$paramas['id_user']}' AND id_product = '{$paramas['id_product']}' ";
             $result = mysqli_query($conn,$select);
         //  $data = [];
             if ( $result >0) {
