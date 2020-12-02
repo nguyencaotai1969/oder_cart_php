@@ -113,25 +113,38 @@ class AdminController extends BaseController
  }
  public function product_host(){
   $data=[];
-  $total_records = $this->productModel->count_total_records();
-  $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $limit = 20;
+  $data['total_records'] = $this->productModel->count_total_records();
+  $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+  $data['limit'] = 20;
   // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
   // tổng số trang
-  $total_page = ceil($total_records / $limit);
+  $data['total_page'] = ceil($data['total_records'] / $data['limit']);
 
   // Giới hạn current_page trong khoảng 1 đến total_page
-  if ($current_page > $total_page) {
-   $current_page = $total_page;
-  } else if ($current_page < 1) {
-   $current_page = 1;
+  if ($data['current_page'] > $data['total_page']) {
+   $data['current_page'] = $data['total_page'];
+  } else if ($data['current_page'] < 1) {
+   $data['current_page'] = 1;
   }
 
   // Tìm Start
-  $start = ($current_page - 1) * $limit;
-  $data['product_host'] = $this->productModel->product_host($start, $limit);
- 
+  $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+  $data['product_host'] = $this->productModel->product_host($data['start'], $data['limit']);
   return $this->view("Admin.list_product_host",$data);
+
+ }
+ public function Delete_Product_Host(){
+
+  $id_product_host = isset($_POST['id'])? $_POST['id']:"";
+  $this->adminModel->delete_product_host($id_product_host);
+ }
+ public function Change_product_Host(){
+   $id = isset($_GET['id'])? $_GET['id']:"";
+   $data = [];
+  $data['product'] = $this->adminModel->change_product_host($id);
+  $data['category'] = $this->adminModel->getAll_category();
+
+  return $this->view("Admin.product_change", $data);
 
  }
  public function admin() {

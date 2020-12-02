@@ -14,7 +14,6 @@
 
  <!-- Custom fonts for this template-->
  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
  <!-- Custom styles for this template-->
  <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -57,7 +56,7 @@
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 200.2px;" aria-label="Position: activate to sort column ascending">Price</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 236.2px;" aria-label="Office: activate to sort column ascending">Amount</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">Image </th>
-           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 464.2px;" aria-label="Start date: activate to sort column ascending">Edit</th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Edit</th>
           </tr>
          </thead>
          <tbody>
@@ -68,38 +67,56 @@
            echo "<td>" . $sp['name'] . "</td>";
            echo "<td>" . $sp['pirce'] . "</td>";
            echo "<td>" . $sp['amount'] . "</td>";
-           echo "<td><img width='100px' height='100px' src=".'img/'.$sp['image']."></td>";
-    
+           echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['image'] . "></td>";
+           echo "<td>";
+           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-primary">Xóa</button>';
+           echo '<a href="?controller=admin&action=Change_product_Host&id=' . $sp['id'] . '" Onclick="refresh( ' . $sp['id'] . ')" class="btn btn-primary">Sửa</button>';
+           echo "</td>";
+           echo "</tr>";
           }
 
 
           ?>
-          
+
 
          </tbody>
 
         </table>
        </div>
       </div>
-      
-      <div class="row">
-       <div class="col-sm-12 col-md-5">
 
-       
-       </div>
+      <div class="row">
+
        <div class="col-sm-12 col-md-7">
         <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
          <ul class="pagination">
-          <li class="paginate_button page-item previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-          <li class="paginate_button page-item active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-          <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-          <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-          <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-          <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-          <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-          <li class="paginate_button page-item next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+          <?php
+          // PHẦN HIỂN THỊ PHÂN TRANG
+          // BƯỚC 7: HIỂN THỊ PHÂN TRANG
+
+          // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+          if ($current_page > 1 && $total_page > 1) {
+           echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=product_host&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
+          }
+
+          // Lặp khoảng giữa
+          for ($i = 1; $i <= $total_page; $i++) {
+           // Nếu là trang hiện tại thì hiển thị thẻ span
+           // ngược lại hiển thị thẻ a
+           echo '<li class="paginate_button page-item "><a href="?controller=admin&action=product_host&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
+          }
+
+          // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+          if ($current_page < $total_page && $total_page > 1) {
+
+           echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=product_host&page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
+          }
+          ?>
          </ul>
         </div>
+
+
+
        </div>
       </div>
      </div>
@@ -135,5 +152,29 @@
  require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
  ?>
 </body>
+<script type="text/javascript">
+ function ConfirmDelete(id) {
+  var x = confirm("Bạn Có Chắc Chắn Muốn Xóa Không ?");
+  if (x) {
+   $.ajax({
+    type: "POST",
+    url: "?controller=Admin&action=Delete_Product_Host",
+    data: {
+     id: id
+    },
+    success: function(data) {
+     var message = "";
+     message += "<div   class='alert alert-danger'><strong></strong><b>" + data + "</b>" +
+      "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
+      "</div>";
+     $(".eror").empty();
+     $(".sucssetfully").remove();
+     $(".eror").append(message);
+    }
+   });
+   location.reload(true);
+  }
+ }
+</script>
 
 </html>
