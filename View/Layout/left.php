@@ -33,6 +33,10 @@
    <div class="bg-white py-2 collapse-inner rounded">
     <a class="collapse-item" href="?controller=admin&action=add_product">Thêm Product</a>
     <a class="collapse-item" href="?controller=admin&action=product_host">Sản Phẩm Host</a>
+    <a class="collapse-item" href="?controller=admin&action=product_new">Sản Phẩm Mới</a>
+    <a class="collapse-item" href="?controller=admin&action=product_sale">Sản Phẩm Sale</a>
+
+
    </div>
   </div>
  </li>
