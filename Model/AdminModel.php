@@ -8,6 +8,12 @@ class AdminModel extends Database
         $this->conn = $this->conn();
         // $this->Database = new Database();
     }
+    public function update_product_host($paramas,$id){
+  $conn = $this->conn();
+  $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
+    where id = '{$id['id']}'";
+  $conn->query($UPDATE) === true;
+    }
     public function insert_product($paramas){
      $conn = $this->conn();
      $insert = "INSERT INTO `product` (`id`, `name`, `image`, `pirce`, `details`, `amount`, `product_id`) 

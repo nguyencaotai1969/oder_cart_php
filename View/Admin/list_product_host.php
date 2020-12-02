@@ -69,7 +69,7 @@
            echo "<td>" . $sp['amount'] . "</td>";
            echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['image'] . "></td>";
            echo "<td>";
-           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-primary">Xóa</button>';
+           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-danger">Xóa</button>';
            echo '<a href="?controller=admin&action=Change_product_Host&id=' . $sp['id'] . '" Onclick="refresh( ' . $sp['id'] . ')" class="btn btn-primary">Sửa</button>';
            echo "</td>";
            echo "</tr>";
