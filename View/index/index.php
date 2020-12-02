@@ -73,9 +73,9 @@ if (isset($_SESSION["btnsubmit"])) {
       <div class="form-group">
         <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         <?php
-        if (isset($error)) {
-          echo "<b style='color:red'>" . $error . '</b>';
-        }
+          if (isset($error)) {
+            echo "<b style='color:red'>" . $error . '</b>';
+          }
 
         ?>
       </div>
