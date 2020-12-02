@@ -1,4 +1,4 @@
-<?php 
+<?php
 class AdminController extends BaseController
 {
 
@@ -12,12 +12,14 @@ class AdminController extends BaseController
   $this->sliderModel = new SliderModel();
 
   $this->loadModel('ProductModel');
-
+  $this->checkSession();
   $this->productModel = new ProductModel();
  }
- public function admin(){
+ public function admin()
+ {
   return $this->view("Admin.index");
  }
+ public function user(){
+  return $this->view("Admin.user");
+ }
 }
-
-?>
