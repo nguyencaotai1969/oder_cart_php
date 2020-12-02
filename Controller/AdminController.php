@@ -51,7 +51,18 @@ class AdminController extends BaseController
     
     return $this->view("Admin.index",$data);
  }
-   public function user(){
-    return $this->view("Admin.user");
+  public function user(){
+    $data['list_member'] = $this->adminModel->getAll_User();
+    return $this->view("Admin.user",$data);
+
+    // $check_id_product = $this->adminModel->getAll_User();
+    //             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+   }
+   public function slider(){
+    $data['list_member'] = $this->adminModel->getAll_Slider();
+    return $this->view("Admin.slider",$data);
+
+    // $check_id_product = $this->adminModel->getAll_User();
+    //             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
    }
 }

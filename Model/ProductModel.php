@@ -161,4 +161,5 @@ class ProductModel extends Database
             ];
         }
     }
+    
 }

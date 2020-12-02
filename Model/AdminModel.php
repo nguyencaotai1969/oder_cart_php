@@ -25,7 +25,46 @@ class AdminModel extends Database
      while ($row = $result->fetch_assoc()) {
       // echo "<pre>";
       // var_dump($row);
+      $data = $row;
+     }
+    } else {
+     echo "0 results";
+    }
+    return $data;
+   }
+   public function getAll_User()
+   {
+    $conn = $this->conn();
+    $select = "SELECT user.id,user.full_name,user.Phone,user.email,user.username,user.img,user.gid,tb_group_user.name 
+    FROM user LEFT OUTER JOIN tb_group_user ON user.gid = tb_group_user.id WHERE user.gid = 2";
+    $result =  $conn->query($select);
+    $data = [];
+    if ($result->num_rows > 0) {
+     // output data of each row
+     while ($row = $result->fetch_assoc()) {
+      // echo "<pre>";
+      // var_dump($row);
       $data[] = $row;
+      
+     }
+    } else {
+     echo "0 results";
+    }
+    return $data;
+   }
+   public function getAll_Slider()
+   {
+    $conn = $this->conn();
+    $select = "SELECT * FROM `silder`";
+    $result =  $conn->query($select);
+    $data = [];
+    if ($result->num_rows > 0) {
+     // output data of each row
+     while ($row = $result->fetch_assoc()) {
+      // echo "<pre>";
+      // var_dump($row);
+      $data[] = $row;
+      
      }
     } else {
      echo "0 results";
