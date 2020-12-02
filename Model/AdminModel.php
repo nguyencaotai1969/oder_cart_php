@@ -141,10 +141,39 @@ class AdminModel extends Database
     $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
         where id = '{$id['id']}'";
     $conn->query($UPDATE) === true;
-}
+    }
   public function delete_product_suggestion($id){
     $conn = $this->conn();
     $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
     $conn->query($DELETE) === true;
     }
+    public function change_product_oder($id){
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM product where product_id = 2 and id = $id");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+    
+         // output data of each row
+         while ($row = $result->fetch_assoc()) {
+    
+          $data[] = $row;
+         }
+         return $data;
+        } else {
+         return $data = [
+          "error" => "Khong tim thay ket qua!"
+         ];
+        }
+      }
+      public function update_product_oder($paramas,$id){
+        $conn = $this->conn();
+        $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
+            where id = '{$id['id']}'";
+        $conn->query($UPDATE) === true;
+        }
+        public function delete_product_oder($id){
+            $conn = $this->conn();
+            $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
+            $conn->query($DELETE) === true;
+            }
  }
