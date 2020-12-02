@@ -9,10 +9,10 @@ class AdminModel extends Database
         // $this->Database = new Database();
     }
     public function update_product_host($paramas,$id){
-  $conn = $this->conn();
-  $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
-    where id = '{$id['id']}'";
-  $conn->query($UPDATE) === true;
+        $conn = $this->conn();
+        $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
+            where id = '{$id['id']}'";
+        $conn->query($UPDATE) === true;
     }
     public function insert_product($paramas){
      $conn = $this->conn();
@@ -43,10 +43,11 @@ class AdminModel extends Database
     $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
     $conn->query($DELETE) === true;
     }
+    
    public function getAll_category()
    {
     $conn = $this->conn();
-    $select = "SELECT * from category";
+    $select = "SELECT * FROM `category`";
     $result =  $conn->query($select);
     $data = [];
     if ($result->num_rows > 0) {
@@ -116,4 +117,34 @@ class AdminModel extends Database
     $insert = "DELETE FROM `silder` WHERE id = '{$paramas['id']}' ";
     $conn->query($insert) === true;
    }
+
+   public function change_product_suggestion($id){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM product where product_id = 3 and id = $id");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+     // output data of each row
+     while ($row = $result->fetch_assoc()) {
+
+      $data[] = $row;
+     }
+     return $data;
+    } else {
+     return $data = [
+      "error" => "Khong tim thay ket qua!"
+     ];
+    }
+  }
+  public function update_product_suggestion($paramas,$id){
+    $conn = $this->conn();
+    $UPDATE = "UPDATE `product` set  `name` = '{$paramas['names']}', `image` = '{$paramas['images']}', `pirce`='{$paramas['pirce']}', `details`='{$paramas['details']}', `amount`='{$paramas['amount']}', `product_id`='{$paramas['product_id']}' 
+        where id = '{$id['id']}'";
+    $conn->query($UPDATE) === true;
+}
+  public function delete_product_suggestion($id){
+    $conn = $this->conn();
+    $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
+    $conn->query($DELETE) === true;
+    }
  }
