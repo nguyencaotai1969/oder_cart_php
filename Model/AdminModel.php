@@ -8,7 +8,13 @@ class AdminModel extends Database
         $this->conn = $this->conn();
         // $this->Database = new Database();
     }
-   public function getAll()
+    public function insert_product($paramas){
+     $conn = $this->conn();
+     $insert = "INSERT INTO `product` (`id`, `name`, `image`, `pirce`, `details`, `amount`, `product_id`) 
+     VALUES (NULL, '{$paramas['names']}', '{$paramas['images']}', '{$paramas['pirce']}', '{$paramas['details']}', '{$paramas['amount']}', '{$paramas['product_id']}')";
+     $conn->query($insert) === true;
+    }
+   public function getAll_category()
    {
     $conn = $this->conn();
     $select = "SELECT * from category";
