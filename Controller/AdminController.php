@@ -134,7 +134,6 @@ class AdminController extends BaseController
 
  }
  public function Delete_Product_Host(){
-
   $id_product_host = isset($_POST['id'])? $_POST['id']:"";
   $this->adminModel->delete_product_host($id_product_host);
  }
@@ -317,20 +316,9 @@ class AdminController extends BaseController
     return $this->view("Admin.updateslider", $data);
    }
    public function delete_slider(){
-    $data = [];
-    $fileupload = isset($_FILES['fileupload']) ? $_FILES['fileupload'] : "";
-    $id = isset($_GET['id']) ? $_GET['id'] : "";
-     if ($id == "") {
-      $data['error'] = "Thiếu Thông Tin Sản Phẩm";
-      // echo 1;
-     } else {
-       $paramas = [];
-       $paramas['id'] = $id;
-       $insert = $this->adminModel->delete_slider($paramas);
-       $data['error'] = "delete Sản Phẩm Thành Công !";
-       return $this->view("Admin.slider", $data);
-     }
-    return $this->view("Admin.delete_slider", $data);
+    $id_product_host = isset($_POST['id'])? $_POST['id']:"";
+    $id = isset($_POST['id'])? $_POST['id']:"";
+    $this->adminModel->delete_slider($id_product_host);
    }
 
 }

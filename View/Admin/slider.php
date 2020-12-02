@@ -162,10 +162,9 @@
                 echo "<td>".$sp['image']."</td>";
                 echo "<td>
                 <a  href='?controller=admin&action=update_slider&id=".$sp['id']."'><button  class='btn btn-primary'>Sửa</button></a>
-                <a  href='?controller=admin&action=delete_slider&id=".$sp['id']."'>
-                    <button class='border-0 btn-transition btn btn-outline-danger'>
+                    <button Onclick='ConfirmDelete( " . $sp['id'] . ")' class='border-0 btn-transition btn btn-outline-danger'>
                     <i class='fa fa-trash-alt'></i>
-                </button></a></td></tr>";}
+                </button></td></tr>";}
 
 
             ?>
@@ -204,5 +203,28 @@
  require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
  ?>
 </body>
-
+<script type="text/javascript">
+ function ConfirmDelete(id) {
+  var x = confirm("Bạn Có Chắc Chắn Muốn Xóa Không ?");
+  if (x) {
+   $.ajax({
+    type: "POST",
+    url: "?controller=Admin&action=delete_slider",
+    data: {
+     id: id
+    },
+    success: function(data) {
+     var message = "";
+     message += "<div   class='alert alert-danger'><strong></strong><b>" + data + "</b>" +
+      "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
+      "</div>";
+     $(".eror").empty();
+     $(".sucssetfully").remove();
+     $(".eror").append(message);
+    }
+   });
+   location.reload(true);
+  }
+ }
+</script>
 </html>
