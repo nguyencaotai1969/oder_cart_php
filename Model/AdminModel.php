@@ -71,4 +71,20 @@ class AdminModel extends Database
     }
     return $data;
    }
+   public function insert_slider($paramas){
+    $conn = $this->conn();
+    $insert = "INSERT INTO `silder`(`name`, `image`) VALUES ('{$paramas['names']}','{$paramas['images']}') ";
+    $conn->query($insert) === true;
+   }
+
+   public function update_slider($paramas){
+    $conn = $this->conn();
+    $insert = "UPDATE `silder` SET `name`='{$paramas['names']}',`image`='{$paramas['images']}' WHERE id = '{$paramas['id']}' ";
+    $conn->query($insert) === true;
+   }
+   public function delete_slider($paramas){
+    $conn = $this->conn();
+    $insert = "DELETE FROM `silder` WHERE id = '{$paramas['id']}' ";
+    $conn->query($insert) === true;
+   }
  }

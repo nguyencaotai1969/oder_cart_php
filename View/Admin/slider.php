@@ -148,9 +148,9 @@
             <thead>
                 <tr role="row">
                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id</th>
-                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 150.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 200.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 400.2px;" aria-label="Position: activate to sort column ascending">Image</th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 236.2px;" aria-label="Office: activate to sort column ascending">Chức Năng</th>
+                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 100.2px;" aria-label="Office: activate to sort column ascending">Chức Năng</th>
                 </tr>
             </thead>
             <tbody>
@@ -160,9 +160,12 @@
                 echo "<tr role='row' class='odd'><td tabindex='0' class='sorting_1'>".$i++."</td>";
                 echo "<td>".$sp['name']."</td>";
                 echo "<td>".$sp['image']."</td>";
-                echo "<td><button class='btn btn-primary'>Sửa</button><button class='border-0 btn-transition btn btn-outline-danger'>
-                <i class='fa fa-trash-alt'></i>
-            </button></td></tr>";}
+                echo "<td>
+                <a  href='?controller=admin&action=update_slider&id=".$sp['id']."'><button  class='btn btn-primary'>Sửa</button></a>
+                <a  href='?controller=admin&action=delete_slider&id=".$sp['id']."'>
+                    <button class='border-0 btn-transition btn btn-outline-danger'>
+                    <i class='fa fa-trash-alt'></i>
+                </button></a></td></tr>";}
 
 
             ?>
