@@ -594,4 +594,31 @@ class IndexController extends BaseController
             echo json_encode($error);
         }
     }
+    //Chuyển sản phẩm từ order_user sang bảng transaction_data
+    public function insert_transaction_data_to_user_order()
+    {
+        try {
+        
+            $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+            $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+            $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
+
+             if ($id_user == "" || $id_product == "") {
+                $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
+                echo json_encode($errorNull);
+            } else {
+                $paramas['id_user'] = $id_user;
+                $paramas['id_product'] = $id_product;
+                $paramas['quantily'] = $quantily;
+
+               $check_id_product = $this->userModel->insert_transaction_data($paramas);
+                echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+            }  
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
+    
 }

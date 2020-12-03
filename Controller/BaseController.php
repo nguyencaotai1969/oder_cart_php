@@ -31,7 +31,7 @@ class BaseController{
     public function checkACL($pms){
         //1. Khai báo các quyền tự do.
         $public_acl = ['Index.Product_suggestion'
-        , 'Index.Login'
+        , 'Index.Login' 
         , 'Index.Admin','Index.Logout', 'Index.Index'
         , 'Index.User_order_cart', 'Index.Change_profile'
         , 'Index.User_profile', 'Index.Slider', 'Index.Product_suggestion'
@@ -39,7 +39,8 @@ class BaseController{
         , 'Index.All_product', 'Index.Search_product'
         , 'Index.Product_sale', 'Index.Register', 'Index.Select_id_product_order_user'
         ,'Index.Search_id_product_order_user'
-        ,'Index.Update_id_product_order_user', 'Index.Delete_id_product_order_user'];
+        ,'Index.Update_id_product_order_user', 'Index.Delete_id_product_order_user'
+        ,'Index.Insert_transaction_data_to_user_order'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra
             return true;
         //2. Kiểm tra tài khoản đã đăng nhập hay chưa.

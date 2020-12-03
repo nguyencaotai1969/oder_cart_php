@@ -227,6 +227,28 @@ public function change_phone_profile_user($paramas,$id){
               }  
 
         }
+        // Thêm dữ liệu từ bảng user_oder sang lưu trữ transaction_data
+    public function insert_transaction_data($paramas){
+        $conn = $this->conn();
+        $date = getdate();
+        $update =$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+    
+        $select = "INSERT INTO `transaction_data`(`id_user`, `id_product`, `quantity`, `date`) 
+        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantily']}','$update') ";
+        $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result >0) {
+                $data =[
+                    "user_oder" =>"Chuyển sang trạng thái giao hàng"];
+            return $data;
+          } else {
+                return $data =[
+                    "Error" =>"lỗi"
+                ];
+          }  
+
+    }
+    
     
     
 }
