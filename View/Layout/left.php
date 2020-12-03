@@ -35,6 +35,8 @@
     <a class="collapse-item" href="?controller=admin&action=product_host">Sản Phẩm Host</a>
     <a class="collapse-item" href="?controller=admin&action=product_new">Sản Phẩm Mới</a>
     <a class="collapse-item" href="?controller=admin&action=product_sale">Sản Phẩm Sale</a>
+    <a class="collapse-item" href="?controller=admin&action=product_suggestion">Sản Phẩm Gợi ý</a>
+    <a class="collapse-item" href="?controller=admin&action=Product_oder">Sản Phẩm oder</a>
 
 
    </div>
@@ -63,10 +65,7 @@
   <div id="collapseUtilitiess" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
    <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="utilities-color.html">Colors</a>
-    <a class="collapse-item" href="utilities-border.html">Borders</a>
-    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-    <a class="collapse-item" href="utilities-other.html">Other</a>
+    <a class="collapse-item" href="?controller=admin&action=slider">View slider</a>
     <!-- <a class="collapse-item" href="utilities-border.html">Borders</a>
     <a class="collapse-item" href="utilities-animation.html">Animations</a>
     <a class="collapse-item" href="utilities-other.html">Other</a> -->

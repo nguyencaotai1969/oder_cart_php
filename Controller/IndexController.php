@@ -620,4 +620,5 @@ class IndexController extends BaseController
             echo json_encode($error);
         }
     }
+    
 }

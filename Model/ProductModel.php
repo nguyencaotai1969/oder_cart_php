@@ -161,5 +161,26 @@ class ProductModel extends Database
             ];
         }
     }
+    public function user_all($start, $limit)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM user where gid = 2 ORDER BY id DESC LIMIT  $start, $limit");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
     
 }

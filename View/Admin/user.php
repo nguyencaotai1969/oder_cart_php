@@ -45,154 +45,89 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-     <!-- Noi Dung Viet o day -->
-     <div>
-     <!-- <table class="table table-bordered cart_summary">
-        <thead>
-            <tr>
-                <th class="cart_product">Product</th>
-                <th>Description</th>
-                <th>Avail.</th>
-                <th>Unit price</th>
-                <th>Qty</th>
-                <th>Total</th>
-                <th class="action"><i class="fa fa-trash-o"></i>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="cart_product">
-                    <a href="#"><img src="product-100x122.jpg" alt="Product">
-                    </a>
-                </td>
-                <td class="cart_description">
-                    <p class="product-name"><a href="#">Frederique Constant </a>
-                    </p>
-                    <small class="cart_ref">SKU : #123654999</small>
-                    <br>
-                    <small><a href="#">Color : Beige</a></small>
-                    <br>
-                    <small><a href="#">Size : S</a></small>
-                </td>
-                <td class="cart_avail"><span class="label label-success">In stock</span>
-                </td>
-                <td class="price"><span>61,19 €</span>
-                </td>
-                <td class="qty">
-                    <input class="form-control input-sm" type="text" value="1">
-                    <a href="#"><i class="fa fa-caret-up"></i></a>
-                    <a href="#"><i class="fa fa-caret-down"></i></a>
-                </td>
-                <td class="price">
-                    <span>61,19 €</span>
-                </td>
-                <td class="action">
-                    <a href="#">Delete item</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="cart_product">
-                    <a href="#"><img src="product-100x122.jpg" alt="Product">
-                    </a>
-                </td>
-                <td class="cart_description">
-                    <p class="product-name"><a href="#">Frederique Constant </a>
-                    </p>
-                    <small class="cart_ref">SKU : #123654999</small>
-                    <br>
-                    <small><a href="#">Color : Beige</a></small>
-                    <br>
-                    <small><a href="#">Size : S</a></small>
-                </td>
-                <td class="cart_avail"><span class="label label-success">In stock</span>
-                </td>
-                <td class="price"><span>61,19 €</span>
-                </td>
-                <td class="qty">
-                    <input class="form-control input-sm" type="text" value="1">
-                    <a href="#"><i class="fa fa-caret-up"></i></a>
-                    <a href="#"><i class="fa fa-caret-down"></i></a>
-                </td>
-                <td class="price">
-                    <span>61,19 €</span>
-                </td>
-                <td class="action">
-                    <a href="#">Delete item</a>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2" rowspan="2"></td>
-                <td colspan="3">Total products (tax incl.)</td>
-                <td colspan="2">122.38 €</td>
-            </tr>
-            <tr>
-                <td colspan="3"><strong>Total</strong>
-                </td>
-                <td colspan="2"><strong>122.38 €</strong>
-                </td>
-            </tr>
-        </tfoot>
-    </table>	 -->
-    <div class="card-body">
-
-        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
-        <div class="row">
-        <div class="col-sm-12 col-md-6">
-        <div class="dataTables_length" id="example_length">
-        <label>Show 
-        <select name="example_length" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm">
-        <option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option>
-        </select> entries</label></div></div><div class="col-sm-12 col-md-6">
-        <div id="example_filter" class="dataTables_filter">
-        <label>Search:
-            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">
-            </label></div></div></div><div class="row">
-            <div class="col-sm-12">
-            <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
-            <thead>
-                <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id</th>
-                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 312.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 200.2px;" aria-label="Position: activate to sort column ascending">Phone</th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 236.2px;" aria-label="Office: activate to sort column ascending">Email</th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">Username   </th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 464.2px;" aria-label="Start date: activate to sort column ascending">Avatar</th>
-                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 184.2px;" aria-label="Salary: activate to sort column ascending">Quyền</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                $i =1;
-                foreach($list_member as $sp){
-                echo "<tr role='row' class='odd'><td tabindex='0' class='sorting_1'>".$i++."</td>";
-                echo "<td>".$sp['full_name']."</td>";
-                echo "<td>".$sp['Phone']."</td>";
-                echo "<td>".$sp['email']."</td>";
-                echo "<td>".$sp['username']."</td>";
-                echo "<td>".$sp['img']."</td>";
-                echo "<td>".$sp['name']."</td></tr>";}
+     <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+      <div class="row">
+       <div class="col-sm-12">
+        <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
+         <thead>
+          <tr role="row">
+           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id</th>
+           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 312.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 200.2px;" aria-label="Position: activate to sort column ascending">Phone</th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 400.2px;" aria-label="Office: activate to sort column ascending">Email</th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">Username </th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Avata</th>
+          </tr>
+         </thead>
+         <tbody>
+          <?php
+          $i = 1;
+          foreach ($list_member as $sp) {
+           echo "<tr role='row' class='odd'><td tabindex='0' class='sorting_1'>" . $i++ . "</td>";
+           echo "<td>" . $sp['full_name'] . "</td>";
+           echo "<td>" . $sp['Phone'] . "</td>";
+           echo "<td>" . $sp['email'] . "</td>";
+           echo "<td>" . $sp['username'] . "</td>";
+           echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['img'] . "></td>";
+         
+           echo "</tr>";
+          }
 
 
-            ?>
-            
-            </tbody>
-        
-        </table></div></div><div class="row">
-        <div class="col-sm-12 col-md-5">
-        
-        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 
-        <?php
-           echo "".count($list_member);
-        ?> entries</div></div>
-        <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
-    </div>
+          ?>
 
+
+         </tbody>
+
+        </table>
+       </div>
+      </div>
+
+      <div class="row">
+
+       <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+         <ul class="pagination">
+          <?php
+          // PHẦN HIỂN THỊ PHÂN TRANG
+          // BƯỚC 7: HIỂN THỊ PHÂN TRANG
+
+          // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+          if ($current_page > 1 && $total_page > 1) {
+           echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=user&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
+          }
+
+          // Lặp khoảng giữa
+          for ($i = 1; $i <= $total_page; $i++) {
+           // Nếu là trang hiện tại thì hiển thị thẻ span
+           // ngược lại hiển thị thẻ a
+           echo '<li class="paginate_button page-item "><a href="?controller=admin&action=user&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
+          }
+
+          // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+          if ($current_page < $total_page && $total_page > 1) {
+
+           echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=user&page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
+          }
+          ?>
+         </ul>
+        </div>
+
+
+
+       </div>
+      </div>
      </div>
-
     </div>
+
+   </div>
+  </div>
+ </div>
+
+
+
+
+ </div>
     <!-- /.container-fluid -->
 
    </div>

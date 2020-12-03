@@ -96,20 +96,20 @@
 
           // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
           if ($current_page > 1 && $total_page > 1) {
-           echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=product_host&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
+           echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=product_suggestion&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
           }
 
           // Lặp khoảng giữa
           for ($i = 1; $i <= $total_page; $i++) {
            // Nếu là trang hiện tại thì hiển thị thẻ span
            // ngược lại hiển thị thẻ a
-           echo '<li class="paginate_button page-item "><a href="?controller=admin&action=product_host&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
+           echo '<li class="paginate_button page-item "><a href="?controller=admin&action=product_suggestion&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
           }
 
           // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
           if ($current_page < $total_page && $total_page > 1) {
 
-           echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=product_host&page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
+           echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=product_suggestion&page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
           }
           ?>
          </ul>

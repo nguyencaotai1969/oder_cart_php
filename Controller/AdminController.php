@@ -322,11 +322,25 @@ class AdminController extends BaseController
   $this->adminModel->delete_product_new($id_product_host);
  }
   public function user(){
-    $data['list_member'] = $this->adminModel->getAll_User();
-    return $this->view("Admin.user",$data);
-
-    // $check_id_product = $this->adminModel->getAll_User();
-    //             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+    $data=[];
+    $data['total_records'] = $this->productModel->count_total_records();
+    $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+    $data['limit'] = 20;
+    // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+    // tổng số trang
+    $data['total_page'] = ceil($data['total_records'] / $data['limit']);
+  
+    // Giới hạn current_page trong khoảng 1 đến total_page
+    if ($data['current_page'] > $data['total_page']) {
+     $data['current_page'] = $data['total_page'];
+    } else if ($data['current_page'] < 1) {
+     $data['current_page'] = 1;
+    }
+  
+    // Tìm Start
+    $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+    $data['list_member'] = $this->productModel->user_all($data['start'], $data['limit']);
+    return $this->view("Admin.user",$data); 
    }
    public function slider(){
     $data['list_member'] = $this->adminModel->getAll_Slider();
