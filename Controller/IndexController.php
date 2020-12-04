@@ -602,6 +602,9 @@ class IndexController extends BaseController
             $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
             $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
             $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
+            $name = isset($_POST['name'])?$_POST['name']:"";
+            $address = isset($_POST['address'])?$_POST['address']:"";
+            $phone = isset($_POST['phone'])?$_POST['phone']:"";
 
              if ($id_user == "" || $id_product == "") {
                 $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
@@ -610,6 +613,9 @@ class IndexController extends BaseController
                 $paramas['id_user'] = $id_user;
                 $paramas['id_product'] = $id_product;
                 $paramas['quantily'] = $quantily;
+                $paramas['name'] = $name;
+                $paramas['address'] = $address;
+                $paramas['phone'] = $phone;
 
                $check_id_product = $this->userModel->insert_transaction_data($paramas);
                 echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
