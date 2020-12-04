@@ -38,7 +38,7 @@ class IndexController extends BaseController
         $data = [];
         $datalogin = [];
         if (isset($_SESSION['username'])) {
-            header("Location:?controller=admin&action=admin");
+            header("Location:?controller=admin&action=index");
         } else {
             if (isset($_POST['btnsubmit'])) {
                 if ($_POST['username'] == "" || $_POST['password'] == "") {
@@ -59,7 +59,7 @@ class IndexController extends BaseController
                                  session_unset();
                                 session_destroy();
                             }else{
-                            header("Location:?controller=admin&action=admin");
+                            header("Location:?controller=admin&action=index");
                                 
                             }
                         } else {
@@ -100,7 +100,6 @@ class IndexController extends BaseController
                     $datalogin['password'] = md5($password);
                     $data_user = $this->userModel->getLogin($datalogin);
                     if (isset($data_user)) {
-
                         unset($data_user['password']);
                         $data = json_encode($data_user['id'], JSON_UNESCAPED_UNICODE);
                         $jsonwebtoken = JWT::encode($data, "khoa_token");
