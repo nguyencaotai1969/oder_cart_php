@@ -105,6 +105,7 @@ class ProductModel extends Database
             ];
         }
     }
+    
     public function product_host($start, $limit){
         $conn = $this->conn();
         $result = mysqli_query($conn, "SELECT * FROM product where product_id = 5 ORDER BY id DESC LIMIT  $start, $limit");

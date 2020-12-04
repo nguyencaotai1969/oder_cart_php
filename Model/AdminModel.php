@@ -36,6 +36,29 @@ class AdminModel extends Database
      VALUES (NULL, '{$paramas['names']}', '{$paramas['images']}', '{$paramas['pirce']}', '{$paramas['details']}', '{$paramas['amount']}', '{$paramas['product_id']}')";
   $conn->query($insert) === true;
  }
+ public function change_product_new(){
+    $conn = $this->conn();
+  $result = mysqli_query($conn, "SELECT * FROM product where product_id = 5 and id = $id");
+  $data = [];
+  if ($result && $result->num_rows > 0) {
+
+   // output data of each row
+   while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+       }
+       return $data;
+      } else {
+       return $data = [
+        "error" => "Khong tim thay ket qua!"
+       ];
+      }
+    }
+    public function delete_product_new($id){
+    $conn = $this->conn();
+    $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
+    $conn->query($DELETE) === true;
+ }
  public function change_product_host($id)
  {
   $conn = $this->conn();
@@ -72,7 +95,7 @@ class AdminModel extends Database
      while ($row = $result->fetch_assoc()) {
       // echo "<pre>";
       // var_dump($row);
-      $data = $row;
+      $data[] = $row;
      }
     } else {
      echo "0 results";
@@ -151,6 +174,25 @@ class AdminModel extends Database
      return $data = [
       "error" => "Khong tim thay ket qua!"
      ];
+    }
+  }
+  public function change_slider($id)
+  {
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM silder where id = $id");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    } else {
+      return $data = [
+        "error" => "Khong tim thay ket qua!"
+      ];
     }
   }
   public function update_product_suggestion($paramas,$id){

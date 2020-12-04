@@ -38,7 +38,7 @@ class BaseController{
         ,'Index.Product_oders', 'Index.Product_new', 'Index.Product_host'
         , 'Index.All_product', 'Index.Search_product'
         , 'Index.Product_sale', 'Index.Register', 'Index.Select_id_product_order_user'
-        ,'Index.Search_id_product_order_user'
+        ,'Index.Search_id_product_order_user','Admin.Login', 'Admin.Admin'
         ,'Index.Update_id_product_order_user', 'Index.Delete_id_product_order_user'
         ,'Index.Insert_transaction_data_to_user_order'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra

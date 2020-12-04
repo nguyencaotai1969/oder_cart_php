@@ -4,122 +4,133 @@
 
 <head>
 
- <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <meta name="description" content="">
- <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
- <title>SB Admin 2 - Dashboard</title>
+  <title>SB Admin 2 - Dashboard</title>
 
- <!-- Custom fonts for this template-->
- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
- <!-- Custom styles for this template-->
- <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
- <!-- Page Wrapper -->
- <div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-  <!-- Sidebar -->
-  <?php
-  require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'left') . '.php');
-  ?>
-  <!-- End of Sidebar -->
-
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
-
-   <!-- Main Content -->
-   <div id="content">
-
-    <!-- Topbar -->
+    <!-- Sidebar -->
     <?php
-    require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'header') . '.php');
+    require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'left') . '.php');
     ?>
-    <!-- End of Topbar -->
+    <!-- End of Sidebar -->
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-     <div class="row justify-content-center">
-      <div class="col-12 col-md-12">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <?php
+        require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'header') . '.php');
+
+        ?>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-12">
 
 
-       <!--Form with header-->
+              <!--Form with header-->
 
 
-       <div class="card border-primary rounded-0">
-        <div class="card-header p-0">
-         <div class="bg-info text-white text-center py-2">
-          <h3>Thêm Slider</h3>
-         </div>
-        </div>
+              <div class="card border-primary rounded-0">
+                <div class="card-header p-0">
+                  <div class="bg-info text-white text-center py-2">
+                    <h3>Sửa Slider</h3>
+                  </div>
+                </div>
 
-        <div class="card-body p-3">
-         <?php
+                <div class="card-body p-3">
+                  <?php
 
-         if (isset($error)) {
+                  if (isset($error)) {
 
-          echo   '<div class="alert alert-danger">
+                    echo   '<div class="alert alert-danger">
    <strong>'
-           . $error . '</strong>
+                      . $error . '</strong>
 </div>';
-         }
-         ?>
-         <!--Body-->
+                  }
+                  ?>
+                  <!--Body-->
 
-         <form action="" method="post" enctype="multipart/form-data">
-          <div class="form-group">
-           <div class="input-group mb-2">
-            <input type="text" class="form-control" name="names" placeholder="Tên Sản Phẩm">
-           </div>
+                  <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="names" placeholder="Tên Sản Phẩm : <?php echo $slider[0]['name']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="file" name='fileupload' class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <b>Ảnh Cũ : <br></b>
+                      <img width="100px" height="100px" src='img/<?php echo $slider[0]['image']; ?>'>
+                    </div>
+                    <div class="text-center">
+                      <input type="submit" value=" Sửa" name="btnsubmit" class="btn btn-info btn-block rounded-0 py-2">
+                    </div>
+                </div>
+
+              </div>
+              </form>
+              <!--Form with header-->
+
+
+            </div>
           </div>
-          <div class="form-group">
-           <input type="file" name='fileupload' class="form-control">
-          </div>
-          <div class="text-center">
-           <input type="submit" value="Thêm" name="btnsubmit" class="btn btn-info btn-block rounded-0 py-2">
-          </div>
+
+
+
+
         </div>
-
-       </div>
-       </form>
-       <!--Form with header-->
-
+        <!-- /.container-fluid -->
 
       </div>
-     </div>
+      <!-- End of Main Content -->
 
-
-
+      <!-- Footer -->
+      <?php
+      require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'footer') . '.php');
+      ?>
+      <!-- End of Footer -->
 
     </div>
-    <!-- /.container-fluid -->
-
-   </div>
-   <!-- End of Main Content -->
-
-   <!-- Footer -->
-   <?php
-   require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'footer') . '.php');
-   ?>
-   <!-- End of Footer -->
+    <!-- End of Content Wrapper -->
 
   </div>
-  <!-- End of Content Wrapper -->
+  <!-- End of Page Wrapper -->
 
- </div>
- <!-- End of Page Wrapper -->
-
- <!-- Scroll to Top Button-->
- <?php
- require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
- ?>
+  <!-- Scroll to Top Button-->
+  <?php
+  require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
+  ?>
 </body>
+
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
 
 </html>
