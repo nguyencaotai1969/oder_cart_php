@@ -68,7 +68,7 @@
            echo "<td>" . $sp['Phone'] . "</td>";
            echo "<td>" . $sp['email'] . "</td>";
            echo "<td>" . $sp['username'] . "</td>";
-           echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['img'] . "></td>";
+           echo "<td><img width='100px' height='100px' src="  . $sp['img'] . "></td>";
          
            echo "</tr>";
           }

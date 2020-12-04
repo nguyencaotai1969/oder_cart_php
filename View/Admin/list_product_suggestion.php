@@ -158,7 +158,7 @@
   if (x) {
    $.ajax({
     type: "POST",
-    url: "?controller=Admin&action=Delete_Product_Suggestion",
+    url: "?controller=Admin&action=Delete_product_suggestion",
     data: {
      id: id
     },
