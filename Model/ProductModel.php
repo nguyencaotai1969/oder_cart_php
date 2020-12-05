@@ -32,10 +32,28 @@ class ProductModel extends Database
     }
 
     // dem so luong data co trong san
+    public function count_total_user()
+    {
+        $conn = $this->conn();
+        $select = "SELECT count(id) as total FROM user";
+        $result = mysqli_query($conn, $select);
+
+        $row = mysqli_fetch_assoc($result);
+        return  $total_records = $row['total'];
+    }
     public function count_total_records()
     {
         $conn = $this->conn();
         $select = "SELECT count(id) as total FROM product";
+        $result = mysqli_query($conn, $select);
+
+        $row = mysqli_fetch_assoc($result);
+        return  $total_records = $row['total'];
+    }
+    public function count_total_records_admin($id)
+    {
+        $conn = $this->conn();
+        $select = "SELECT count(id) as total FROM product  where product_id = $id";
         $result = mysqli_query($conn, $select);
 
         $row = mysqli_fetch_assoc($result);

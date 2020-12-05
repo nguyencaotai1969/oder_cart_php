@@ -41,6 +41,7 @@
         <!-- Topbar -->
         <?php
         require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'header') . '.php');
+
         ?>
         <!-- End of Topbar -->
 
@@ -56,7 +57,7 @@
               <div class="card border-primary rounded-0">
                 <div class="card-header p-0">
                   <div class="bg-info text-white text-center py-2">
-                    <h3>Thêm Sản Phẩm Cho Bạn</h3>
+                    <h3>Sửa Slider</h3>
                   </div>
                 </div>
 
@@ -76,46 +77,18 @@
                   <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="names" placeholder="Tên Sản Phẩm">
+                        <input type="text" class="form-control" name="names" placeholder="Tên Sản Phẩm : <?php echo $slider[0]['name']; ?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <input type="file" name='file' class="form-control">
                     </div>
                     <div class="form-group">
-                      <div class="input-group mb-2">
-
-                        <input type="text" class="form-control" id="nombre" name="amount" placeholder="Số Lượng">
-                      </div>
+                      <b>Ảnh Cũ : <br></b>
+                      <img width="100px" height="100px" src='img/<?php echo $slider[0]['image']; ?>'>
                     </div>
-                    <div class="form-group">
-                      <select class="form-control" name="product_id">
-                        <option value="">Chọn Loại Sản Phẩm</option>
-                        <?php
-                        for ($i = 0; $i < count($category); $i++) {
-                          echo '<option value=' . $category[$i]['id'] . '>' . $category[$i]['name'] . '</option>';
-                        }
-
-
-                        ?>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <div class="input-group mb-2">
-
-                        <input type="text" class="form-control" id="nombre" name="pirce" placeholder="Giá Sản Phẩm">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="input-group mb-2">
-
-                        <textarea class="form-control" name="details" placeholder="Mô Tả Sản Phẩm"></textarea>
-                      </div>
-                    </div>
-
                     <div class="text-center">
-                      <input type="submit" value="Thêm" name="btnsubmit" class="btn btn-info btn-block rounded-0 py-2">
+                      <input type="submit" value=" Sửa" name="btnsubmit" class="btn btn-info btn-block rounded-0 py-2">
                     </div>
                 </div>
 
@@ -153,5 +126,11 @@
   require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
   ?>
 </body>
+
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
 
 </html>
