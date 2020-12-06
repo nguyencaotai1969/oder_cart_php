@@ -600,7 +600,7 @@ class IndexController extends BaseController
         
             $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
             $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
-            $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
+            $quantity = isset($_POST['quantity'])?$_POST['quantity']:"";
             $name = isset($_POST['name'])?$_POST['name']:"";
             $address = isset($_POST['address'])?$_POST['address']:"";
             $phone = isset($_POST['phone'])?$_POST['phone']:"";
@@ -611,7 +611,7 @@ class IndexController extends BaseController
             } else {
                 $paramas['id_user'] = $id_user;
                 $paramas['id_product'] = $id_product;
-                $paramas['quantily'] = $quantily;
+                $paramas['quantity'] = $quantity;
                 $paramas['name'] = $name;
                 $paramas['address'] = $address;
                 $paramas['phone'] = $phone;
@@ -625,5 +625,79 @@ class IndexController extends BaseController
             echo json_encode($error);
         }
     }
-    
+    public function Select_transaction_data_to_id_user_Cho_Xac_Nhan()
+    {
+        try {
+            
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+        
+            $check_id_product = $this->productModel->Select_transaction_data_to_id_user_Cho_Xac_Nhan($id_user);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
+    public function Update_transaction_data_to_id_Huy_Don_Hang()
+    {
+        try {
+            
+            $id = isset($_POST['id'])?$_POST['id']:"";
+        
+            $check_id_product = $this->productModel->Update_transaction_data_to_id_Huy_Don_Hang($id);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
+    public function Select_transaction_data_to_id_user_Da_Huy()
+    {
+        try {
+            
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+        
+            $check_id_product = $this->productModel->Select_transaction_data_to_id_user_Da_Huy($id_user);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
+    public function Select_transaction_data_to_id_user_Da_Mua()
+    {
+        try {
+            
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+        
+            $check_id_product = $this->productModel->Select_transaction_data_to_id_user_Da_Mua($id_user);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
+    public function Select_transaction_data_to_id_user_Dang_Giao()
+    {
+        try {
+            
+            $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
+        
+            $check_id_product = $this->productModel->Select_transaction_data_to_id_user_Dang_Giao($id_user);
+            echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
+                 
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi các trường không hợp lệ !";
+            echo json_encode($error);
+        }
+    }
 }

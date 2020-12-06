@@ -40,7 +40,11 @@ class BaseController{
         , 'Index.Product_sale', 'Index.Register', 'Index.Select_id_product_order_user'
         ,'Index.Search_id_product_order_user','Admin.Login', 'Admin.Admin'
         ,'Index.Update_id_product_order_user', 'Index.Delete_id_product_order_user'
-        ,'Index.Insert_transaction_data_to_user_order'];
+        ,'Index.Insert_transaction_data_to_user_order',"Index.Select_transaction_data_to_id_user_Cho_Xac_Nhan"
+        ,'Index.Update_transaction_data_to_id_Huy_Don_Hang'
+        ,'Index.Select_transaction_data_to_id_user_Da_Huy'
+        ,'Index.Select_transaction_data_to_id_user_Da_Mua'
+        ,'Index.Select_transaction_data_to_id_user_Dang_Giao'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra
             return true;
         //2. Kiểm tra tài khoản đã đăng nhập hay chưa.

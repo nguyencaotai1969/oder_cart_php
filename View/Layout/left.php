@@ -25,6 +25,22 @@
 
  <!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
+  <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilitiesss" aria-expanded="true" aria-controls="collapseUtilities">
+   <i class="fas fa-fw fa-wrench"></i>
+   <span>Quản Lý Đơn Hàng</span>
+  </a>
+  <div id="collapseUtilitiesss" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+   <div class="bg-white py-2 collapse-inner rounded">
+    <h6 class="collapse-header">Các chức năng :</h6> 
+    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đang chờ xử lý</a>
+    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đã hủy</a>
+    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đang giao</a>
+    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đã mua</a>
+  
+   </div>
+  </div>
+ </li>
+ <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
    <i class="fas fa-fw fa-wrench"></i>
    <span>Quản Lý Sản Phẩm</span>
@@ -72,6 +88,7 @@
    </div>
   </div>
  </li>
+ 
  <!-- Divider -->
  <hr class="sidebar-divider">
 

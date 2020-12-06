@@ -818,4 +818,47 @@ class AdminController extends BaseController
     $id_product_host = isset($_POST['id']) ? $_POST['id'] : "";
     $this->adminModel->delete_product_oder($id_product_host);
   }
+  // product oder
+  public function List_DonMua_choxacnhan()
+  {
+    $data = [];
+    $data['total_records'] = $this->productModel->count_total_records();
+    $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+    $data['limit'] = 20;
+    // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+    // tổng số trang
+    $data['total_page'] = ceil($data['total_records'] / $data['limit']);
+
+    // Giới hạn current_page trong khoảng 1 đến total_page
+    if ($data['current_page'] > $data['total_page']) {
+      $data['current_page'] = $data['total_page'];
+    } else if ($data['current_page'] < 1) {
+      $data['current_page'] = 1;
+    }
+
+    // Tìm Start
+  
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Cho_Xac_Nhan();
+    return $this->view("Admin.list_DonMua_choxacnhan", $data);
+  }
+  public function Choxacnhan_upto_huydon()
+  {
+    $id = isset($_POST['id']) ? $_POST['id'] : "";
+    $this->productModel->Update_transaction_data_to_id_Huy_Don_Hang($id);
+  }
+  public function Choxacnhan_upto_xacnhan()
+  {
+    $id = isset($_POST['id']) ? $_POST['id'] : "";
+    $id_product = isset($_POST['id_product']) ? $_POST['id_product'] : "";
+    $quantily = isset($_POST['quantily']) ? $_POST['quantily'] : "";
+  
+    $data = $this->productModel->Product_to_id($id_product);
+    $soluong =1;
+    foreach ($data as $sp) {
+      $soluong = $sp["amount"];
+      $soluong = $soluong - $quantily;
+      $data = $this->productModel->Update_product_upto_soluong($id_product,$soluong);
+    }
+    $data = $this->productModel->Update_transaction_data_to_id_Xac_nhan($id);
+  }
 }
