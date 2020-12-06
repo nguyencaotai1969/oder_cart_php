@@ -13,7 +13,7 @@
 
  <!-- Nav Item - Dashboard -->
  <li class="nav-item active">
-  <a class="nav-link" href="?controller=admin&action=admin">
+  <a class="nav-link" href="?controller=admin&action=index">
    <i class="fas fa-fw fa-tachometer-alt"></i>
    <span>Doanh Thu</span></a>
  </li>

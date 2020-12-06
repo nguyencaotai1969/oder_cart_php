@@ -42,6 +42,25 @@ class Rexgex{
     public static function regex_text($string){
         return preg_match('/[^a-zA-z*]+/',$string);
     }
+    public static function switch_data($category){
+        switch ($category) {
+            case $category == 1:
+                header("Location:?controller=admin&action=product_new");
+                break;
+            case $category == 2:
+                header("Location:?controller=admin&action=Product_oder");
+                break;
+            case $category == 3:
+                header("Location:?controller=admin&action=product_suggestion");
+                break;
+            case $category == 4:
+                header("Location:?controller=admin&action=product_sale");
+                break;
+            case $category == 5:
+                header("Location:?controller=admin&action=product_host");
+                break;
+        }
+    }
    public static function slug($str) {
 
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
