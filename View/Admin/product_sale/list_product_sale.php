@@ -69,8 +69,8 @@
            echo "<td>" . $sp['amount'] . "</td>";
            echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['image'] . "></td>";
            echo "<td>";
-           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-danger">Xóa</button>';
-           echo '<a href="?controller=admin&action=Change_product_sale&id=' . $sp['id'] . '" Onclick="refresh( ' . $sp['id'] . ')" class="btn btn-primary">Sửa</button>';
+           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-danger"><i class="fa fa-trash-alt"></i> </button>';
+           echo '<a href="?controller=admin&action=Change_product_sale&id=' . $sp['id'] . '" Onclick="refresh( ' . $sp['id'] . ')" class="btn btn-primary"><i class="fa fa-cog "></i></button>';
            echo "</td>";
            echo "</tr>";
           }

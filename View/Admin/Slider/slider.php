@@ -166,7 +166,7 @@
                                                     echo "<td>" . $sp['name'] . "</td>";
                                                     echo "<td> <img width='50px' height='50px' src='img/" . $sp['image'] . "'></td>";
                                                     echo "<td>
-                <a  href='?controller=admin&action=update_slider&id=" . $sp['id'] . "'><button  class='btn btn-primary'>Sửa</button></a>
+                <a  href='?controller=admin&action=update_slider&id=" . $sp['id'] . "'><button  class='btn btn-primary'><i class='fa fa-cog '></i></button></a>
                     <button Onclick='ConfirmDelete(".$sp['id'].")' class='border-0 btn-transition btn btn-danger'>
                     <i class='fa fa-trash-alt'></i>
                 </button></td></tr>";
