@@ -83,8 +83,8 @@
            echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['image'] . "></td>";
            echo "<td>" . $sp['name_status'] . "</td>";
            echo "<td>";
-           echo '<button type="button"  Onclick="ConfirmAplly( ' . $sp['id'].','.$sp['id_product'].','.$sp['quantity'] . ')"class="btn btn-primary">Xác nhận đơn</button>';
-           echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-danger">hủy đơn</button>';
+          //  echo '<button type="button"  Onclick="ConfirmAplly( ' . $sp['id'].','.$sp['id_product'].','.$sp['quantity'] . ')"class="btn btn-primary">Xác nhận đơn</button>';
+          //  echo '<button type="button"  Onclick="ConfirmDelete( ' . $sp['id'] . ')"class="btn btn-danger">hủy đơn</button>';
            echo "</td>";
            echo "</tr>";
         }else{
@@ -113,7 +113,40 @@
         </table>
        </div>
       </div>
+      <div class="row">
 
+<div class="col-sm-12 col-md-7">
+ <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+  <ul class="pagination">
+   <?php
+   // PHẦN HIỂN THỊ PHÂN TRANG
+   // BƯỚC 7: HIỂN THỊ PHÂN TRANG
+
+   // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+   if ($current_page > 1 && $total_page > 1) {
+    echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=List_DonMua_dahuy&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
+   }
+
+   // Lặp khoảng giữa
+   for ($i = 1; $i <= $total_page; $i++) {
+    // Nếu là trang hiện tại thì hiển thị thẻ span
+    // ngược lại hiển thị thẻ a
+    echo '<li class="paginate_button page-item "><a href="?controller=admin&action=List_DonMua_dahuy&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
+   }
+
+   // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+   if ($current_page < $total_page && $total_page > 1) {
+
+    echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=List_DonMua_dahuy &page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
+   }
+   ?>
+  </ul>
+ </div>
+
+
+
+</div>
+</div>
     
       </div>
      </div>
@@ -149,53 +182,5 @@
  require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
  ?>
 </body>
-<script type="text/javascript">
- function ConfirmDelete(id) {
-  var x = confirm("Bạn Có Chắc Chắn Muốn Hủy Đơn Này Không ?");
-  if (x) {
-   $.ajax({
-    type: "POST",
-    url: "?controller=Admin&action=Choxacnhan_upto_huydon",
-    data: {
-     id: id
-    },
-    success: function(data) {
-     var message = "";
-     message += "<div   class='alert alert-danger'><strong></strong><b>" + data + "</b>" +
-      "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
-      "</div>";
-     $(".eror").empty();
-     $(".sucssetfully").remove();
-     $(".eror").append(message);
-    }
-   });
-   location.reload(true);
-  }
- }
- function ConfirmAplly(id,id_product,quantily) {
-  var x = confirm("Bạn Có Muốn Xác Nhận Đơn Này Không ?");
-  if (x) {
-   $.ajax({
-    type: "POST",
-    url: "?controller=Admin&action=Choxacnhan_upto_xacnhan",
-    data: {
-     id: id,
-     id_product: id_product,
-     quantily: quantily
-    },
-    success: function(data) {
-     var message = "";
-     message += "<div   class='alert alert-danger'><strong></strong><b>" + data + "</b>" +
-      "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
-      "</div>";
-     $(".eror").empty();
-     $(".sucssetfully").remove();
-     $(".eror").append(message);
-    }
-   });
-   location.reload(true);
-  }
- }
-</script>
 
 </html>

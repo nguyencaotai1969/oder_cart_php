@@ -566,9 +566,9 @@ class AdminController extends BaseController
     }
 
     // Tìm Start
-  
-    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Cho_Xac_Nhan();
-    return $this->view("Admin.list_DonMua_choxacnhan", $data);
+    $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Cho_Xac_Nhan($data['start'], $data['limit']);
+    return $this->view("Admin.product_DonMua.list_DonMua_choxacnhan", $data);
   }
   public function Choxacnhan_upto_huydon()
   {
@@ -589,5 +589,77 @@ class AdminController extends BaseController
       $data = $this->productModel->Update_product_upto_soluong($id_product,$soluong);
     }
     $data = $this->productModel->Update_transaction_data_to_id_Xac_nhan($id);
+  }
+  public function List_DonMua_dahuy()
+  {
+    $data = [];
+    $data['total_records'] = $this->productModel->count_total_records();
+    $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+    $data['limit'] = 20;
+    // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+    // tổng số trang
+    $data['total_page'] = ceil($data['total_records'] / $data['limit']);
+
+    // Giới hạn current_page trong khoảng 1 đến total_page
+    if ($data['current_page'] > $data['total_page']) {
+      $data['current_page'] = $data['total_page'];
+    } else if ($data['current_page'] < 1) {
+      $data['current_page'] = 1;
+    }
+
+    // Tìm Start
+    $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Huy($data['start'],$data['limit']);
+    return $this->view("Admin.product_DonMua.List_DonMua_dahuy", $data);
+  }
+  public function List_DonMua_DangGiao()
+  {
+    $data = [];
+    $data['total_records'] = $this->productModel->count_total_records();
+    $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+    $data['limit'] = 20;
+    // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+    // tổng số trang
+    $data['total_page'] = ceil($data['total_records'] / $data['limit']);
+
+    // Giới hạn current_page trong khoảng 1 đến total_page
+    if ($data['current_page'] > $data['total_page']) {
+      $data['current_page'] = $data['total_page'];
+    } else if ($data['current_page'] < 1) {
+      $data['current_page'] = 1;
+    }
+
+    // Tìm Start
+    $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Dang_giao($data['start'],$data['limit']);
+    return $this->view("Admin.product_DonMua.List_DonMua_danggiao", $data);
+  }
+  public function DangGiao_upto_DaNhan()
+  {
+    $id = isset($_POST['id']) ? $_POST['id'] : "";
+    $this->productModel->Update_transaction_data_to_id_Da_giao($id);
+  }
+  public function List_DonMua_DaMua()
+  {
+    $data = [];
+    $data['total_records'] = $this->productModel->count_total_records();
+    $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
+    $data['limit'] = 20;
+    // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+    // tổng số trang
+    $data['total_page'] = ceil($data['total_records'] / $data['limit']);
+
+    // Giới hạn current_page trong khoảng 1 đến total_page
+    if ($data['current_page'] > $data['total_page']) {
+      $data['current_page'] = $data['total_page'];
+    } else if ($data['current_page'] < 1) {
+      $data['current_page'] = 1;
+    }
+
+    // Tìm Start
+    $data['start'] = ($data['current_page'] - 1) * $data['limit'];
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Mua($data['start'],$data['limit']);
+    return $this->view("Admin.product_DonMua.List_DonMua_damua", $data);
   }
 }

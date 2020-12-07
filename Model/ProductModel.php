@@ -249,7 +249,7 @@ class ProductModel extends Database
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
         INNER JOIN product ON transaction_data.id_product = product.id
-        WHERE id_user = $id_user AND status = 3");
+        WHERE id_user = $id_user AND status = 3 ");
         $data = [];
         if ($result && $result->num_rows > 0) {
 
@@ -317,14 +317,14 @@ class ProductModel extends Database
             ];
         }
     }
-    public function Select_ALL_transaction_data_Cho_Xac_Nhan()
+    public function Select_ALL_transaction_data_Cho_Xac_Nhan($start, $limit)
     {
         $conn = $this->conn();
         $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
         INNER JOIN product ON transaction_data.id_product = product.id
-        WHERE status = 0");
+        WHERE status = 0 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
         $data = [];
         if ($result && $result->num_rows > 0) {
 
@@ -394,4 +394,96 @@ class ProductModel extends Database
           }  
 
     }
+    public function Update_transaction_data_to_id_Da_giao($id){
+        $conn = $this->conn();
+        $select = "UPDATE `transaction_data` SET `status`= 2 WHERE id = $id ";
+        $result = mysqli_query($conn,$select);
+    //  $data = [];
+        if ( $result >0) {
+                $data =[
+                    "user_oder" =>"Hủy đơn hàng thành công"];
+            return $data;
+          } else {
+                return $data =[
+                    "Error" =>"lỗi"
+                ];
+          }  
+
+    }
+    public function Select_ALL_transaction_data_Da_Huy($start, $limit)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        FROM `transaction_data` 
+        INNER JOIN product_status ON transaction_data.status = product_status.id 
+        INNER JOIN product ON transaction_data.id_product = product.id
+        WHERE  status = 3 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    public function Select_ALL_transaction_data_Dang_giao($start, $limit)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        FROM `transaction_data` 
+        INNER JOIN product_status ON transaction_data.status = product_status.id 
+        INNER JOIN product ON transaction_data.id_product = product.id
+        WHERE  status = 1 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    public function Select_ALL_transaction_data_Da_Mua($start, $limit)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        FROM `transaction_data` 
+        INNER JOIN product_status ON transaction_data.status = product_status.id 
+        INNER JOIN product ON transaction_data.id_product = product.id
+        WHERE  status = 2 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+
 }

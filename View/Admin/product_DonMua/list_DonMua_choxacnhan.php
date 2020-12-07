@@ -113,7 +113,40 @@
         </table>
        </div>
       </div>
+      <div class="row">
 
+<div class="col-sm-12 col-md-7">
+ <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+  <ul class="pagination">
+   <?php
+   // PHẦN HIỂN THỊ PHÂN TRANG
+   // BƯỚC 7: HIỂN THỊ PHÂN TRANG
+
+   // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+   if ($current_page > 1 && $total_page > 1) {
+    echo '<li class="paginate_button page-item previous disabled" id="example_previous"><a href="?controller=admin&action=List_DonMua_choxacnhan&page=' . ($current_page - 1) . '" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>';
+   }
+
+   // Lặp khoảng giữa
+   for ($i = 1; $i <= $total_page; $i++) {
+    // Nếu là trang hiện tại thì hiển thị thẻ span
+    // ngược lại hiển thị thẻ a
+    echo '<li class="paginate_button page-item "><a href="?controller=admin&action=List_DonMua_choxacnhan&page=' . $i . '" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">' . $i . '</a></li>';
+   }
+
+   // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+   if ($current_page < $total_page && $total_page > 1) {
+
+    echo '<li class="paginate_button page-item next" id="example_next"><a href="?controller=admin&action=List_DonMua_choxacnhan&page=' . ($current_page + 1) . '" aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>';
+   }
+   ?>
+  </ul>
+ </div>
+
+
+
+</div>
+</div>
     
       </div>
      </div>

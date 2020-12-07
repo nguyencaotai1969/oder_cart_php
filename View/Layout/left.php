@@ -32,10 +32,10 @@
   <div id="collapseUtilitiesss" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
    <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Các chức năng :</h6> 
-    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đang chờ xử lý</a>
-    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đã hủy</a>
-    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đang giao</a>
-    <a class="collapse-item" href="?controller=admin&action=slider">View Đơn đã mua</a>
+    <a class="collapse-item" href="?controller=admin&action=List_DonMua_choxacnhan">View Đơn đang chờ xử lý</a>
+    <a class="collapse-item" href="?controller=admin&action=List_DonMua_DangGiao">View Đơn đang giao</a>
+    <a class="collapse-item" href="?controller=admin&action=List_DonMua_DaMua">View Đơn đã mua</a>
+    <a class="collapse-item" href="?controller=admin&action=List_DonMua_dahuy">View Đơn đã hủy</a>
   
    </div>
   </div>
