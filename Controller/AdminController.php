@@ -24,7 +24,15 @@ class AdminController extends BaseController
   }
   public function index()
   {
-    return $this->view("Admin.index");
+    $data =[];
+
+    $sum = 0;
+    foreach ($this->adminModel->Revenue() as $value) {
+      $sum += $value['quantity']* $value['pirce'];
+    }
+    $data['sum'] = $sum;
+  
+    return $this->view("Admin.index",$data);
   }
   // day la them san pham ===========================================================
   public function add_product()

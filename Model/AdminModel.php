@@ -8,6 +8,20 @@ class AdminModel extends Database
     $this->conn = $this->conn();
     // $this->Database = new Database();
   }
+  public function Revenue(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data JOIN product ON transaction_data.id_product=product.id");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
   public function update_product_host($paramas, $id)
   {
     $conn = $this->conn();
