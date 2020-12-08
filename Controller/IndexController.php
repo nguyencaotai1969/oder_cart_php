@@ -709,4 +709,11 @@ class IndexController extends BaseController
         // var_dump($slider);
         echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
     }
+    public function Select_Slider_Product()
+    {
+        $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+        $check_id_product = $this->productModel->Select_Slider_Product($id_product);
+        // var_dump($slider);
+        echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+    }
 }
