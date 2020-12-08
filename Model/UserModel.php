@@ -235,7 +235,7 @@ public function change_phone_profile_user($paramas,$id){
         $update =$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
     
         $select = "INSERT INTO `transaction_data`(`id_user`, `id_product`, `quantity`, `date` ,`name`, `address`, `phone`) 
-        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantity']}','$update','{$paramas['name']}',
+        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantity']}','2020-12-24 14:21:29','{$paramas['name']}',
         '{$paramas['address']}','{$paramas['phone']}') ";
         $result = mysqli_query($conn,$select);
     //  $data = [];

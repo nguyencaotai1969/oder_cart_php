@@ -80,7 +80,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <input type="file" name='file' class="form-control">
+                      <input type="file" name='file' class="form-control" multiple>
                     </div>
                     <div class="form-group">
                       <div class="input-group mb-2">

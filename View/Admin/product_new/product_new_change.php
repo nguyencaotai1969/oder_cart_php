@@ -84,6 +84,24 @@
                       <input type="file" name='file' class="form-control">
                     </div>
                     <div class="form-group">
+                      <img width="100px" height="100px" src="img/<?php echo $product[0]['image'] ?>">
+                    </div>
+                    <b>Ảnh Slider</b>
+
+                    <div class="form-group">
+                      <input type="file" name='file_slider[]' class="form-control" multiple>
+                    </div>
+                    <div class="form-group">
+
+                      <?php
+                      foreach ($get_slider as $value) {
+                        echo '<img width="100px"Onclick="ConfirmDelete(' . $value['id'] . ')" class="form-groupssd" height="100px" src=' . $value['img'] . ' alt="">';
+                      }
+                      ?>
+
+
+                    </div>
+                    <div class="form-group">
                       <div class="input-group mb-2">
 
                         <input type="text" class="form-control" id="nombre" name="amount" placeholder="Số Lượng <?php echo $product[0]['amount'] ?>">
@@ -154,5 +172,30 @@
   require(self::VIEW_FOLDER_NAME . '/Layout/' . str_replace('.', '/', 'lib') . '.php');
   ?>
 </body>
+<script type="text/javascript">
+  function ConfirmDelete(id) {
+    var x = confirm("Bạn Có Chắc Chắn Muốn Xóa Không ?");
+    if (x) {
+      // console.log(id);
+      $.ajax({
+        type: "POST",
+        url: "?controller=Admin&action=Delete_product_slider",
+        data: {
+          id: id
+        },
+        success: function(data) {
+          var message = "";
+          message += "<div   class='alert alert-danger'><strong></strong><b>" + data + "</b>" +
+            "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
+            "</div>";
+          $(".eror").empty();
+          $(".sucssetfully").remove();
+          $(".eror").append(message);
+        }
+      });
+      location.reload(true);
+    }
+  }
+</script>
 
 </html>
