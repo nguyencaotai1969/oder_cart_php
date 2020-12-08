@@ -111,6 +111,7 @@ class IndexController extends BaseController
                             'id_user' => $data_user['id'],
                             'full_name' => $data_user['full_name'],
                             'username' => $datalogin['username'],
+                            'phone' => $data_user['Phone'],
                             'token' => $jsonwebtoken,
                         ];
 
@@ -699,5 +700,13 @@ class IndexController extends BaseController
             $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
+    }
+    public function Select_transaction_data_to_id_user()
+    {
+        $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+        $id_status = isset($_POST['id_status'])?$_POST['id_status']:"";
+        $check_id_product = $this->productModel->Select_transaction_data_to_id_user($id_user,$id_status);
+        // var_dump($slider);
+        echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
     }
 }

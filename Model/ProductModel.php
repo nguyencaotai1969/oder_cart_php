@@ -485,5 +485,26 @@ class ProductModel extends Database
             ];
         }
     }
+    public function Select_transaction_data_to_id_user($id_user,$id_status)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT COUNT(status) AS Count FROM `transaction_data` WHERE status = $id_status AND id_user = $id_user");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
 
 }
