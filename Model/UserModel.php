@@ -158,7 +158,8 @@ public function change_phone_profile_user($paramas,$id){
     //Select user_order theo id
     public function  Select_id_user_order($id_user,$id_product){
         $conn = $this->conn();
-        $select = "SELECT * FROM `user_order` WHERE id_user =$id_user AND id_product = $id_product ";
+        $select = "SELECT user_order.*,product.name,product.image,product.pirce,product.details,product.amount,product.product_id FROM `user_order` 
+        INNER JOIN product ON user_order.id_product = product.id WHERE id_user = $id_user AND id_product = $id_product";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result &&  $result->num_rows >0) {
