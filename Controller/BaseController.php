@@ -44,7 +44,8 @@ class BaseController{
         ,'Index.Update_transaction_data_to_id_Huy_Don_Hang'
         ,'Index.Select_transaction_data_to_id_user_Da_Huy'
         ,'Index.Select_transaction_data_to_id_user_Da_Mua'
-        ,'Index.Select_transaction_data_to_id_user_Dang_Giao'];
+        ,'Index.Select_transaction_data_to_id_user_Dang_Giao'
+        ,'Index.Select_transaction_data_to_id_user'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra
             return true;
         //2. Kiểm tra tài khoản đã đăng nhập hay chưa.
