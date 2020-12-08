@@ -506,5 +506,27 @@ class ProductModel extends Database
             ];
         }
     }
+    public function Select_Slider_Product($id_product)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM `slider_product` WHERE id_product = $id_product");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    
 
 }
