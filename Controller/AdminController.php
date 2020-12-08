@@ -24,15 +24,15 @@ class AdminController extends BaseController
   }
   public function index()
   {
-    $data =[];
+    $data = [];
 
     $sum = 0;
     foreach ($this->adminModel->Revenue() as $value) {
-      $sum += $value['quantity']* $value['pirce'];
+      $sum += $value['quantity'] * $value['pirce'];
     }
     $data['sum'] = $sum;
-  
-    return $this->view("Admin.index",$data);
+
+    return $this->view("Admin.index", $data);
   }
   // day la them san pham ===========================================================
   public function add_product()
@@ -54,7 +54,7 @@ class AdminController extends BaseController
     } else {
       if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
-      }else{
+      } else {
         $dt = Validate::up_img();
         if (isset($dt['error']['sucssec']) == 1) {
           $paramas = [];
@@ -65,7 +65,7 @@ class AdminController extends BaseController
           $paramas['amount'] = $amount;
           $paramas['product_id'] = $category;
           $insert = $this->adminModel->insert_product($paramas);
-          Rexgex::switch_data($category);
+          // Rexgex::switch_data($category);
 
           $data['error'] = "<b style='color:green'>Thêm Sản Phẩm Thành Công !</b>";
 
@@ -74,8 +74,6 @@ class AdminController extends BaseController
           $data['error'] = Validate::up_img()['error'];
         }
       }
-     
-      
     }
 
 
@@ -83,7 +81,12 @@ class AdminController extends BaseController
     // var_dump( $data['category']);
     return $this->view("Admin.addproduct", $data);
   }
-
+  // day la xoa silider 
+  public function Delete_product_slider()
+  {
+    $id_product_host = isset($_POST['id']) ? $_POST['id'] : "";
+    $this->adminModel->delete_slider_id($id_product_host);
+  }
 
 
 
@@ -115,6 +118,7 @@ class AdminController extends BaseController
     $id_product_host = isset($_POST['id']) ? $_POST['id'] : "";
     $this->adminModel->delete_product_host($id_product_host);
   }
+  
   public function Change_product_Host()
   {
     $id = [];
@@ -122,45 +126,52 @@ class AdminController extends BaseController
     $data = [];
     $data['product'] = $this->adminModel->change_product_host($id_product);
     $data['category'] = $this->adminModel->getAll_category();
+    $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
     $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
+    $file_slider  = isset($_FILES['file_slider']) ? $_FILES['file_slider'] : "";
 
 
     if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-          if(Rexgex::regex_number($price) || Rexgex::regex_number($amount)  )
-          {
-            $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
-          }else{
-             $dt = Validate::up_img();
-                if (isset($dt['error']['sucssec']) == 1) {
-                
-                  
-                $paramas = [];
-                $paramas['names'] = $nameproduct;
-                $paramas['images'] = $dt['error']['name_file'];
-                $paramas['pirce'] = $price;
-                $paramas['details'] = $namdescriptione;
-                $paramas['amount'] = $amount;
-                $paramas['product_id'] = $category;
-                $id = $id_product;
-                $insert = $this->adminModel->update_product_host($paramas, $id);
-                $data['error'] = "Sửa Sản Phẩm Thành Công !";
-                Rexgex::switch_data($category);
-                } else {
-                  $data['error'] = Validate::up_img()['error'];
-                }
+      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+        $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
+      } else {
+        $dt = Validate::up_img();
+        if (isset($dt['error']['sucssec']) == 1) {
+
+
+          $paramas = [];
+          $paramas['names'] = $nameproduct;
+          $paramas['images'] = $dt['error']['name_file'];
+          $paramas['pirce'] = $price;
+          $paramas['details'] = $namdescriptione;
+          $paramas['amount'] = $amount;
+          $paramas['product_id'] = $category;
+          $id = $id_product;
+          $insert = $this->adminModel->update_product_host($paramas, $id);
+          $datas = Validate::up_many_file_slider();
+          
+          if (isset($datas['error']['sucssec']) == 1) {
+            unset($datas['error']);
+          
+            foreach ($datas as $value) {
+              $paramass['images']= "img/".$value;
+              $insert_slider = $this->adminModel->insert_slider_product($paramass,$id);
+            }
           }
-     
-      
-
-
+          $data['error'] = "Sửa Sản Phẩm Thành Công !";
+          Rexgex::switch_data($category);
+        } else {
+          $data['error'] = Validate::up_img()['error'];
+        }
+      }
     }
     return $this->view("Admin.product_host.product_change", $data);
   }
@@ -196,6 +207,7 @@ class AdminController extends BaseController
     $data = [];
     $data['product'] = $this->adminModel->change_product_new($id_product);
     $data['category'] = $this->adminModel->getAll_category();
+    $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
@@ -208,31 +220,35 @@ class AdminController extends BaseController
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-        if(Rexgex::regex_number($price) || Rexgex::regex_number($amount)  )
-          {
-            $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
-          }else{
-             $dt = Validate::up_img();
-                if (isset($dt['error']['sucssec']) == 1) {
-                  $paramas = [];
-                  $paramas['names'] = $nameproduct;
-                  $paramas['images'] = $dt['error']['name_file'];
-                  $paramas['pirce'] = $price;
-                  $paramas['details'] = $namdescriptione;
-                  $paramas['amount'] = $amount;
-                  $paramas['product_id'] = $category;
-                  $id = $id_product;
-                  $insert = $this->adminModel->update_product_new($paramas, $id);
-                  $data['error'] = "Sửa Sản Phẩm Thành Công !";
-                  Rexgex::switch_data($category);
-                } else {
-                  $data['error'] = Validate::up_img()['error'];
-                }
+      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+        $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
+      } else {
+        $dt = Validate::up_img();
+        if (isset($dt['error']['sucssec']) == 1) {
+          $paramas = [];
+          $paramas['names'] = $nameproduct;
+          $paramas['images'] = $dt['error']['name_file'];
+          $paramas['pirce'] = $price;
+          $paramas['details'] = $namdescriptione;
+          $paramas['amount'] = $amount;
+          $paramas['product_id'] = $category;
+          $id = $id_product;
+          $insert = $this->adminModel->update_product_new($paramas, $id);
+          $datas = Validate::up_many_file_slider();
+          if (isset($datas['error']['sucssec']) == 1) {
+            unset($datas['error']);
+
+            foreach ($datas as $value) {
+              $paramass['images'] = "img/" . $value;
+              $insert_slider = $this->adminModel->insert_slider_product($paramass, $id);
+            }
           }
-      
-    
-
-
+          $data['error'] = "Sửa Sản Phẩm Thành Công !";
+          Rexgex::switch_data($category);
+        } else {
+          $data['error'] = Validate::up_img()['error'];
+        }
+      }
     }
     return $this->view("Admin.product_new.product_new_change", $data);
   }
@@ -276,6 +292,8 @@ class AdminController extends BaseController
     $data = [];
     $data['product'] = $this->adminModel->change_product_new($id_product);
     $data['category'] = $this->adminModel->getAll_category();
+    $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
+
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
@@ -302,6 +320,15 @@ class AdminController extends BaseController
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_sale($paramas, $id);
+          $datas = Validate::up_many_file_slider();
+          if (isset($datas['error']['sucssec']) == 1) {
+            unset($datas['error']);
+
+            foreach ($datas as $value) {
+              $paramass['images'] = "img/" . $value;
+              $insert_slider = $this->adminModel->insert_slider_product($paramass, $id);
+            }
+          }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
         } else {
@@ -311,10 +338,10 @@ class AdminController extends BaseController
     }
     return $this->view("Admin.product_sale.product_sale_change", $data);
   }
-  public function Delete_Product_Sale(){
+  public function Delete_Product_Sale()
+  {
     $id_product_host = isset($_POST['id']) ? $_POST['id'] : "";
     $this->adminModel->delete_product_sale($id_product_host);
-
   }
 
   /// day la san pham goi y ================================================================
@@ -351,6 +378,8 @@ class AdminController extends BaseController
     $data = [];
     $data['product'] = $this->adminModel->change_product_suggestion($id_product);
     $data['category'] = $this->adminModel->getAll_category();
+    $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
+
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
@@ -377,14 +406,21 @@ class AdminController extends BaseController
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_suggestion($paramas, $id);
+          $datas = Validate::up_many_file_slider();
+          if (isset($datas['error']['sucssec']) == 1) {
+            unset($datas['error']);
 
+            foreach ($datas as $value) {
+              $paramass['images'] = "img/" . $value;
+              $insert_slider = $this->adminModel->insert_slider_product($paramass, $id);
+            }
+          }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
         } else {
           $data['error'] = Validate::up_img()['error'];
         }
       }
-     
     }
     return $this->view("Admin.product_suggestion.product_suggestion_change", $data);
   }
@@ -424,6 +460,8 @@ class AdminController extends BaseController
     $data = [];
     $data['product'] = $this->adminModel->change_product_oder($id_product);
     $data['category'] = $this->adminModel->getAll_category();
+        $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
+
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
@@ -447,13 +485,20 @@ class AdminController extends BaseController
         $paramas['product_id'] = $category;
         $id = $id_product;
         $insert = $this->adminModel->update_product_oder($paramas, $id);
+        $datas = Validate::up_many_file_slider();
+        if (isset($datas['error']['sucssec']) == 1) {
+          unset($datas['error']);
 
+          foreach ($datas as $value) {
+            $paramass['images'] = "img/" . $value;
+            $insert_slider = $this->adminModel->insert_slider_product($paramass, $id);
+          }
+        }
         $data['error'] = "Sửa Sản Phẩm Thành Công !";
         Rexgex::switch_data($category);
       } else {
         $data['error'] = Validate::up_img()['error'];
       }
-    
     }
     return $this->view("Admin.product_order.product_oder_change", $data);
   }
@@ -493,7 +538,7 @@ class AdminController extends BaseController
   public function slider()
   {
     $data['list_member'] = $this->adminModel->getAll_Slider();
-    return $this->view("Admin.Slider.slider", $data);    
+    return $this->view("Admin.Slider.slider", $data);
   }
   public function Add_slider()
   {
@@ -504,10 +549,10 @@ class AdminController extends BaseController
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      
+
       $dt = Validate::up_img();
       if (isset($dt['error']['sucssec']) == 1) {
-       
+
         $paramas['names'] = $name;
         $paramas['images'] = $dt['error']['name_file'];
         $this->adminModel->insert_slider($paramas);
@@ -537,15 +582,13 @@ class AdminController extends BaseController
       if (isset($data['error']['sucssec']) == 1) {
         $paramas['names'] = $name;
         $paramas['images'] = $data['error']['name_file'];
-         $paramas['id'] = $id;
+        $paramas['id'] = $id;
         $insert = $this->adminModel->update_slider($paramas);
         $data['error'] = "<b style='color:green'>Thêm Slider Thành Công !</b>";
         header("Location:?controller=admin&action=slider");
       } else {
         $data['error'] = Validate::up_img()['error'];
       }
-
-   
     }
 
     return $this->view("Admin.Slider.updateslider", $data);
@@ -588,13 +631,13 @@ class AdminController extends BaseController
     $id = isset($_POST['id']) ? $_POST['id'] : "";
     $id_product = isset($_POST['id_product']) ? $_POST['id_product'] : "";
     $quantily = isset($_POST['quantily']) ? $_POST['quantily'] : "";
-  
+
     $data = $this->productModel->Product_to_id($id_product);
-    $soluong =1;
+    $soluong = 1;
     foreach ($data as $sp) {
       $soluong = $sp["amount"];
       $soluong = $soluong - $quantily;
-      $data = $this->productModel->Update_product_upto_soluong($id_product,$soluong);
+      $data = $this->productModel->Update_product_upto_soluong($id_product, $soluong);
     }
     $data = $this->productModel->Update_transaction_data_to_id_Xac_nhan($id);
   }
@@ -617,7 +660,7 @@ class AdminController extends BaseController
 
     // Tìm Start
     $data['start'] = ($data['current_page'] - 1) * $data['limit'];
-    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Huy($data['start'],$data['limit']);
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Huy($data['start'], $data['limit']);
     return $this->view("Admin.product_DonMua.List_DonMua_dahuy", $data);
   }
   public function List_DonMua_DangGiao()
@@ -640,7 +683,7 @@ class AdminController extends BaseController
     // Tìm Start
     $data['start'] = ($data['current_page'] - 1) * $data['limit'];
 
-    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Dang_giao($data['start'],$data['limit']);
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Dang_giao($data['start'], $data['limit']);
     return $this->view("Admin.product_DonMua.List_DonMua_danggiao", $data);
   }
   public function DangGiao_upto_DaNhan()
@@ -667,7 +710,7 @@ class AdminController extends BaseController
 
     // Tìm Start
     $data['start'] = ($data['current_page'] - 1) * $data['limit'];
-    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Mua($data['start'],$data['limit']);
+    $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Da_Mua($data['start'], $data['limit']);
     return $this->view("Admin.product_DonMua.List_DonMua_damua", $data);
   }
 }

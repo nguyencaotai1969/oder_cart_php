@@ -13,11 +13,50 @@ class Validate{
     	return  preg_match($regEx, $phone);
 
     }
+    public static function up_many_file_slider(){
+        
+        $data = [];
+        $targetDir = "img/";
+        $allowTypes = array('jpg', 'png', 'jpeg');
+
+        $fileNames = array_filter($_FILES['file_slider']['name']);
+        if (!empty($fileNames)) {
+            foreach ($_FILES['file_slider']['name'] as $key => $val) {
+                // File upload path 
+
+                $fileName = basename($_FILES['file_slider']['name'][$key]);
+                $date = getdate();
+                $link_image = $date['mday'] . $date['mon'] . $date['year'] . $date['seconds'];
+                preg_match('/\.(jpg|jpeg|png)(?:[\?\#].*)?$/i', $fileName, $matches);
+                $png = isset($matches[1]) ? $matches[1] : "";
+                $datass = Rexgex::slug($fileName) . $link_image . "." . $png;
+                $targetFilePath = $targetDir . $datass;
+               
+                // Check whether file type is valid 
+                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                if (in_array($fileType, $allowTypes)) {
+                    // Upload file to server 
+                    if (move_uploaded_file($_FILES["file_slider"]["tmp_name"][$key], $targetFilePath)) {
+                        $data['error'] = [
+                            "sucssec" => 1,
+                            $data[] = $datass
+                        ];
+                    } else {
+                        $data['error'] = "Sorry, there was an error uploading your file.";
+                    }
+                } else {
+                    $data['error'] = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                }
+            }
+        }
+        return $data;
+    }
     public static function up_img(){
         $data = [];
 
         // File upload path
         $targetDir = "img/";
+     
         $fileName = basename($_FILES["file"]["name"]);
         preg_match('/\.(jpg|jpeg|png)(?:[\?\#].*)?$/i', $fileName, $matches);
         $date = getdate();
@@ -26,7 +65,7 @@ class Validate{
         $datas = Rexgex::slug($fileName) . $link_image . "." .$png ;
         $targetFilePath = $targetDir . $datas;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-
+        
         if (!empty($_FILES["file"]["name"])) {
             // Allow certain file formats
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');

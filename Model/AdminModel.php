@@ -22,6 +22,13 @@ class AdminModel extends Database
       return $data;
     }
   }
+  //isert slider product
+  public function insert_slider_product($paramass,$id)
+  {
+    $conn = $this->conn();
+    $insert = "INSERT INTO `slider_product` (`id`, `img`, `id_product`) VALUES (NULL, '{$paramass['images']}', '$id')";
+    $conn->query($insert) === true;
+  }
   public function update_product_host($paramas, $id)
   {
     $conn = $this->conn();
@@ -100,7 +107,11 @@ class AdminModel extends Database
     $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
     $conn->query($DELETE) === true;
   }
-
+  public function delete_slider_id($id){
+    $conn = $this->conn();
+    $DELETE = "DELETE FROM `slider_product` WHERE `slider_product`.`id` = $id";
+    $conn->query($DELETE) === true;
+  }
   public function getAll_category()
   {
     $conn = $this->conn();
@@ -116,6 +127,22 @@ class AdminModel extends Database
       }
     } else {
       echo "0 results";
+    }
+    return $data;
+  }
+  public function get_slider_category($id)
+  {
+    $conn = $this->conn();
+    $select = "SELECT * FROM `slider_product` where id_product = '$id'";
+    $result =  $conn->query($select);
+    $data = [];
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+        // echo "<pre>";
+        // var_dump($row);
+        $data[] = $row;
+      }
     }
     return $data;
   }
