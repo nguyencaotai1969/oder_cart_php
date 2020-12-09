@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9e222435d33f11cdddc5446674301e249f800ce
 <?php
 session_start();
 
