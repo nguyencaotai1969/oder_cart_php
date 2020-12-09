@@ -79,6 +79,7 @@
                         <input type="text" class="form-control" name="names" placeholder="Tên Sản Phẩm">
                       </div>
                     </div>
+                    <b>Avatar</b>
                     <div class="form-group">
                       <input type="file" name='file' class="form-control" multiple>
                     </div>
@@ -87,6 +88,10 @@
 
                         <input type="text" class="form-control" id="nombre" name="amount" placeholder="Số Lượng">
                       </div>
+                    </div>
+                    <b>Ảnh Chi Tiết</b>
+                     <div class="form-group">
+                      <input type="file" name='file_slider[]' class="form-control" multiple>
                     </div>
                     <div class="form-group">
                       <select class="form-control" name="product_id">

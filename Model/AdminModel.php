@@ -22,6 +22,20 @@ class AdminModel extends Database
       return $data;
     }
   }
+  public function select_data_product_litmit(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM product ORDER BY id DESC LIMIT 1");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
   //isert slider product
   public function insert_slider_product($paramass,$id)
   {
