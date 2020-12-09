@@ -46,9 +46,10 @@ class AdminController extends BaseController
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
     $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
+    $file_slider  = isset($_FILES['file_slider']) ? $_FILES['file_slider'] : "";
 
 
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == ""|| $file_slider =="" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
@@ -65,8 +66,19 @@ class AdminController extends BaseController
           $paramas['amount'] = $amount;
           $paramas['product_id'] = $category;
           $insert = $this->adminModel->insert_product($paramas);
-          // Rexgex::switch_data($category);
-
+          Rexgex::switch_data($category);
+          $datas = Validate::up_many_file_slider();
+          $id_product = $this->adminModel->select_data_product_litmit()[0]['id'];
+          
+          if (isset($datas['error']['sucssec']) == 1) {
+            unset($datas['error']);
+          
+            foreach ($datas as $value) {
+              $paramass['images']= "img/".$value;
+              $insert_slider = $this->adminModel->insert_slider_product($paramass, $id_product);
+            }
+          }
+          Rexgex::switch_data($category);
           $data['error'] = "<b style='color:green'>Thêm Sản Phẩm Thành Công !</b>";
 
           // ;
