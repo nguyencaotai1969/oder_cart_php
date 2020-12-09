@@ -1,8 +1,4 @@
-<style>
-    .form-groupssd {
-        padding: 3px;
-    }
-</style>
+
 <?php
 session_start();
 
