@@ -500,7 +500,6 @@ class IndexController extends BaseController
             }
         }
     }
-    
     // select order_user theo id
     public function select_id_product_order_user()
     {

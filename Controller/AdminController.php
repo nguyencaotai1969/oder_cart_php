@@ -614,7 +614,7 @@ class AdminController extends BaseController
   public function List_DonMua_choxacnhan()
   {
     $data = [];
-    $data['total_records'] = $this->productModel->count_total_records();
+    $data['total_records'] = $this->productModel->count_total_records_admin(1);
     $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
     $data['limit'] = 20;
     // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -656,7 +656,7 @@ class AdminController extends BaseController
   public function List_DonMua_dahuy()
   {
     $data = [];
-    $data['total_records'] = $this->productModel->count_total_records();
+    $data['total_records'] = $this->productModel->count_total_records_admin(1);
     $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
     $data['limit'] = 20;
     // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -678,7 +678,7 @@ class AdminController extends BaseController
   public function List_DonMua_DangGiao()
   {
     $data = [];
-    $data['total_records'] = $this->productModel->count_total_records();
+    $data['total_records'] = $this->productModel->count_total_records_admin(1);
     $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
     $data['limit'] = 20;
     // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -694,7 +694,6 @@ class AdminController extends BaseController
 
     // Tìm Start
     $data['start'] = ($data['current_page'] - 1) * $data['limit'];
-
     $data['donmua'] = $this->productModel->Select_ALL_transaction_data_Dang_giao($data['start'], $data['limit']);
     return $this->view("Admin.product_DonMua.List_DonMua_danggiao", $data);
   }
@@ -706,7 +705,7 @@ class AdminController extends BaseController
   public function List_DonMua_DaMua()
   {
     $data = [];
-    $data['total_records'] = $this->productModel->count_total_records();
+    $data['total_records'] = $this->productModel->count_total_records_admin(1);
     $data['current_page'] = isset($_GET['page']) ? $_GET['page'] : 1;
     $data['limit'] = 20;
     // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
