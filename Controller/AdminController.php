@@ -34,6 +34,10 @@ class AdminController extends BaseController
 
     return $this->view("Admin.index", $data);
   }
+  /// day la quan ly tin nhan =======================================================
+  public function Message(){
+    return $this->view("Admin.Message");
+  }
   // day la them san pham ===========================================================
   public function add_product()
   {
