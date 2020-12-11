@@ -284,7 +284,7 @@ class IndexController extends BaseController
             //    var_dump($obj_id_user_oder);
             $user_data_oder = $this->userModel->user_profile($obj_id_user_oder);
             // $data_oders =[];
-            echo json_encode($user_data_oder, JSON_NUMERIC_CHECK);
+            echo json_encode($user_data_oder);
         } catch (Exception $e) {
             $error['errors'] = "Lỗi Token Không Hợp Lệ !";
             echo json_encode($error);
@@ -703,15 +703,15 @@ class IndexController extends BaseController
     }
     public function Select_transaction_data_to_id_user()
     {
-        $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
-        $id_status = isset($_POST['id_status'])?$_POST['id_status']:"";
-        $check_id_product = $this->productModel->Select_transaction_data_to_id_user($id_user,$id_status);
+        $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : "";
+        $id_status = isset($_POST['id_status']) ? $_POST['id_status'] : "";
+        $check_id_product = $this->productModel->Select_transaction_data_to_id_user($id_user, $id_status);
         // var_dump($slider);
         echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
     }
     public function Select_Slider_Product()
     {
-        $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+        $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
         $check_id_product = $this->productModel->Select_Slider_Product($id_product);
         // var_dump($slider);
         echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
