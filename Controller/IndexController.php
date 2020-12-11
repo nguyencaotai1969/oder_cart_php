@@ -716,4 +716,37 @@ class IndexController extends BaseController
         // var_dump($slider);
         echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
     }
+    public function Select_product_dong_gia()
+    {
+        $price = isset($_GET['price']) ? $_GET['price'] : 1;
+        $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : 1;
+        
+        $productModel = $this->productModel->Select_product_dong_gia($price, $id_product);
+        // var_dump($slider);
+        echo json_encode($productModel, JSON_NUMERIC_CHECK);
+    }
+    public function Select_product_tuong_tu()
+    {
+        $total_records = $this->productModel->count_total_records();
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $name = isset($_GET['name']) ? $_GET['name'] : 1;
+        $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : 1;
+        $limit = 5;
+        // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+        // tổng số trang
+        $total_page = ceil($total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($current_page > $total_page) {
+            $current_page = $total_page;
+        } else if ($current_page < 1) {
+            $current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($current_page - 1) * $limit;
+        $productModel = $this->productModel->Select_product_tuong_tu($start, $limit, $name, $id_product);
+        // var_dump($slider);
+        echo json_encode($productModel, JSON_NUMERIC_CHECK);
+    }
 }

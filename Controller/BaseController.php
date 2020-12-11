@@ -46,7 +46,9 @@ class BaseController{
         ,'Index.Select_transaction_data_to_id_user_Da_Mua'
         ,'Index.Select_transaction_data_to_id_user_Dang_Giao'
         ,'Index.Select_transaction_data_to_id_user'
-        ,'Index.Select_Slider_Product'];
+        ,'Index.Select_Slider_Product'
+        ,'Index.Select_product_dong_gia'
+        ,'Index.Select_product_tuong_tu'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra
             return true;
         //2. Kiểm tra tài khoản đã đăng nhập hay chưa.

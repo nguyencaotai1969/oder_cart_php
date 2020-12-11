@@ -527,6 +527,49 @@ class ProductModel extends Database
             ];
         }
     }
-    
 
+    public function  Select_product_dong_gia($price, $id_product)
+    {
+        $conn = $this->conn();
+        $min = $price-10000;
+        $max = $price+10000;
+        $result = mysqli_query($conn, "SELECT * FROM product where pirce > $min AND pirce < $max AND id != $id_product");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    public function  Select_product_tuong_tu($start, $limit, $name, $id_product)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM product where name LIKE '%$name%' AND id != $id_product ORDER BY id DESC LIMIT  $start, $limit");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
 }
