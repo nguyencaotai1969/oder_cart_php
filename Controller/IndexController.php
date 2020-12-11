@@ -500,7 +500,6 @@ class IndexController extends BaseController
             }
         }
     }
-    
     // select order_user theo id
     public function select_id_product_order_user()
     {
@@ -701,5 +700,20 @@ class IndexController extends BaseController
             $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
         }
+    }
+    public function Select_transaction_data_to_id_user()
+    {
+        $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
+        $id_status = isset($_POST['id_status'])?$_POST['id_status']:"";
+        $check_id_product = $this->productModel->Select_transaction_data_to_id_user($id_user,$id_status);
+        // var_dump($slider);
+        echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+    }
+    public function Select_Slider_Product()
+    {
+        $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+        $check_id_product = $this->productModel->Select_Slider_Product($id_product);
+        // var_dump($slider);
+        echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
     }
 }
