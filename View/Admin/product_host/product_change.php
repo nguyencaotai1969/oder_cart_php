@@ -71,7 +71,7 @@
                       . $error . '</strong>
                             </div>';
                   }
-                  echo json_encode($product);
+                
                   ?>
                   <!--Body-->
 
