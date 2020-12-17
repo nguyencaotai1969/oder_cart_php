@@ -1,17 +1,23 @@
 <?php
 include "Core/Dom/Rexgex.php";
 include "Core/Validate/Validate.php";
+include "Core/JWT/jwt.php";
 class AdminController extends BaseController
 {
   protected $userModel = 'userModel';
   protected $sliderModel = 'sliderModel';
   protected $productModel = 'productModel';
   protected $adminModel = 'adminModel';
+  protected $messageModel = 'messageModel';
 
   public function __construct()
   {
+    $this->loadModel('MessageModel');
+    $this->messageModel = new MessageModel();
+
     $this->loadModel('UserModel');
     $this->userModel = new UserModel();
+
 
     $this->loadModel('SliderModel');
 
@@ -34,9 +40,63 @@ class AdminController extends BaseController
 
     return $this->view("Admin.index", $data);
   }
+  
   /// day la quan ly tin nhan =======================================================
   public function Message(){
-    return $this->view("Admin.Message");
+    $data =[];
+    $data['list_user'] = $this->messageModel->Checkuser_message();
+    // id cua user
+    $id_user = isset($_GET['id'])?$_GET['id']:"";
+    // id cua admin login 
+    $id_admin = $_SESSION["username"]['id'];
+    if(isset($_GET['id'])){
+      $data['message'] = $this->messageModel->Chat_message($id_admin, $id_user);
+    }
+ 
+    return $this->view("Admin.message.Message", $data);
+  }
+  public function Api_read_message(){
+    header('Content-type: application/json');
+    if(isset($_GET['id'])){
+      $id_user = isset($_GET['id']) ? $_GET['id'] : "";
+      $id_admin = $_SESSION["username"]['gid'];
+
+      $data['message'] = $this->messageModel->Chat_message($id_admin, $id_user);
+      echo json_encode($data['message']);
+
+    }else{
+      $data = [
+        "error" => "Lỗi Chưa Có Tin Nhắn"
+      ];
+      echo json_encode($data);
+
+    }
+  }
+  public function Send_message(){
+    $data =[];
+    $id_user = isset($_GET['id']) ? $_GET['id'] : "";
+  
+    if(isset($_GET['id'])){
+      $data['id_user'] = $this->messageModel->Find_id($id_user);
+
+    }
+    // $id_admin_send = isset($_POST['id_admin'])? $_POST['id_admin']:"";
+    // $id_user_send = isset($_POST['id_user'])?$_POST['id_user']:"";
+    
+    
+    if(isset($_POST['message']) != ""){
+      $paramas = [];
+
+        $id_user_to = $_POST['id']? $_POST['id']:"";
+       $message = isset($_POST['message']) ? $_POST['message'] : "";
+        $paramas['from_id_user'] = $_SESSION["username"]['gid'];
+       $paramas['to_id_user'] = $id_user_to;
+        $paramas['message'] = $message;
+      $this->messageModel->Admin_send_message($paramas); 
+      
+    }
+    
+    return $this->view("Admin.message.SendMessage",$data);
   }
   // day la them san pham ===========================================================
   public function add_product()

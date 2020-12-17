@@ -7,6 +7,8 @@ class IndexController extends BaseController
     protected $userModel = 'userModel';
     protected $sliderModel = 'sliderModel';
     protected $productModel = 'productModel';
+    protected $messageModel = 'messageModel';
+
     public function __construct()
     {
         $this->loadModel('UserModel');
@@ -19,9 +21,21 @@ class IndexController extends BaseController
         $this->loadModel('ProductModel');
 
         $this->productModel = new ProductModel();
+        $this->loadModel('MessageModel');
+        $this->messageModel = new MessageModel();
         header('Content-type: application/json');
     }
-
+    /// doc tin nhan qua api 
+    public function Api_read_message()
+    {
+        try {
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
+            $json = JWT::decode($token, "khoa_token", true);
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+    }
     public function logout()
     {
         session_start();
@@ -133,6 +147,57 @@ class IndexController extends BaseController
             echo json_encode($error);
         }
     }
+    public function Api_user_read_message(){
+        $data = [];
+        try{
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
+            $json = JWT::decode($token, "khoa_token", true);
+            $data_message = $this->messageModel->User_chat($json,1);
+            if(isset($data_message)){
+                echo json_encode($data_message);
+
+            }
+           
+        }catch(Exception $e){
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+    }
+    public function Insert_user_message(){
+        $data = [];
+        try {
+            
+            $token = isset($_GET['token']) ? $_GET['token'] : "";
+            $message = isset($_POST['message']) ? $_POST['message'] : "";
+            $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : "";
+            $json = JWT::decode($token, "khoa_token", true);
+            $user_data_oder = $this->userModel->user_profile($json);
+            if($user_data_oder == true){
+                 if($message == "" || $id_user == ""){
+                $error = [
+                    1 => 1,
+                    'errors' => "Thiếu Trường Giữ Liệu",
+                ];
+                echo json_encode($error, JSON_NUMERIC_CHECK);
+            }else{
+                $paramas = [];
+                $paramas['from_id_user'] = $json;
+                $paramas['message'] = $message;
+                $this->messageModel->User_send_message($paramas);
+                $error = [
+                    1 => 2,
+                    'errors' => "thanh cong",
+                ];
+                echo json_encode($error, JSON_NUMERIC_CHECK);
+            }
+            }
+          
+            
+        } catch (Exception $e) {
+            $error['errors'] = "Lỗi Token Không Hợp Lệ !";
+            echo json_encode($error);
+        }
+    }
     //api giai ma token user
     public function user_order_cart()
     {
@@ -153,6 +218,7 @@ class IndexController extends BaseController
     {
         try {
             $token = isset($_POST['token']) ? $_POST['token'] : "";
+            
             $json = JWT::decode($token, "khoa_token", true);
             $obj_id_user_oder = json_decode($json);
             $image = isset($_POST['image']) ? $_POST['image'] : "";

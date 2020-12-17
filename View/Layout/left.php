@@ -32,7 +32,7 @@
     <div id="collapseUtilitiessssd" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Các chức năng :</h6>
-        <a class="collapse-item" href="?controller=admin&action=Message">View Đơn đang chờ xử lý</a>
+        <a class="collapse-item" href="?controller=admin&action=Message">Tin Nhắn Của Bạn !</a>
       </div>
   </li>
   <li class="nav-item">

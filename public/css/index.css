@@ -3,10 +3,6 @@
       margin: auto;
   }
   
-  img {
-      max-width: 100%;
-  }
-  
   .inbox_people {
       background: #f8f8f8 none repeat scroll 0 0;
       float: left;
@@ -123,8 +119,9 @@
   }
   
   .received_msg {
+      margin-left: 4px;
       display: inline-block;
-      padding: 0 0 0 10px;
+      padding: 10px 7px 7px 10px;
       vertical-align: top;
       width: 92%;
   }
