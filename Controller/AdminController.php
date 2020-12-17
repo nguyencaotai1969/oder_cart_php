@@ -108,16 +108,51 @@ class AdminController extends BaseController
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
     $file_slider  = isset($_FILES['file_slider']) ? $_FILES['file_slider'] : "";
 
 
-    if ($nameproduct == ""|| $file_slider =="" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == ""|| $file_slider =="" || $fileupload == "" || 
+    $price == "" || $category == "" 
+    // || $size35 == "" 
+    // || $size36 == "" 
+    // || $size37 == ""
+    // || $size38 == ""
+    // || $size39 == ""
+    // || $size40 == ""
+    // || $size41 == ""
+    // || $size42 == ""
+    // || $size43 == ""
+    // || $size44 == ""
+    || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+      if (Rexgex::regex_number($price) 
+      || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ) {
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
       } else {
         $dt = Validate::up_img();
@@ -127,13 +162,86 @@ class AdminController extends BaseController
           $paramas['images'] = $dt['error']['name_file'];
           $paramas['pirce'] = $price;
           $paramas['details'] = $namdescriptione;
-          $paramas['amount'] = $amount;
+          $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
           $paramas['product_id'] = $category;
           $insert = $this->adminModel->insert_product($paramas);
           Rexgex::switch_data($category);
           $datas = Validate::up_many_file_slider();
           $id_product = $this->adminModel->select_data_product_litmit()[0]['id'];
           
+          if($size35 != 0 && $size35 != ""){
+            $paramas['quantity'] = $size35;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 35;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+          if($size36 != 0 && $size36 != ""){
+            $paramas['quantity'] = $size36;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 36;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size37 != 0 && $size37 != ""){
+            $paramas['quantity'] = $size37;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 37;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size38 != 0 && $size38 != ""){
+            $paramas['quantity'] = $size38;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 38;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size39 != 0 && $size39 != ""){
+            $paramas['quantity'] = $size39;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 39;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size40 != 0 && $size40 != ""){
+            $paramas['quantity'] = $size40;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 40;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size41 != 0 && $size41 != ""){
+            $paramas['quantity'] = $size41;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 41;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size42 != 0 && $size42 != ""){
+            $paramas['quantity'] = $size42;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 42;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size43 != 0 && $size43 != ""){
+            $paramas['quantity'] = $size43;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 43;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size44 != 0 && $size44 != ""){
+            $paramas['quantity'] = $size44;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 44;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size45 != 0 && $size45 != ""){
+            $paramas['quantity'] = $size45;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 45;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+           if($size46 != 0 && $size46 != ""){
+            $paramas['quantity'] = $size46;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 46;
+            $insert = $this->adminModel->insert_product_size($paramas);
+          }
+
           if (isset($datas['error']['sucssec']) == 1) {
             unset($datas['error']);
           
@@ -203,24 +311,47 @@ class AdminController extends BaseController
     $data['product'] = $this->adminModel->change_product_host($id_product);
     $data['category'] = $this->adminModel->getAll_category();
     $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
+    $data['get_size'] = $this->adminModel->get_size($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
+    
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
     $file_slider  = isset($_FILES['file_slider']) ? $_FILES['file_slider'] : "";
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
 
-
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" ||  $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+      if (Rexgex::regex_number($price) || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ) {
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
       } else {
         $dt = Validate::up_img();
-        if (isset($dt['error']['sucssec']) == 1) {
+        // if (isset($dt['error']['sucssec']) == 1) {
 
 
           $paramas = [];
@@ -228,12 +359,87 @@ class AdminController extends BaseController
           $paramas['images'] = $dt['error']['name_file'];
           $paramas['pirce'] = $price;
           $paramas['details'] = $namdescriptione;
-          $paramas['amount'] = $amount;
+          $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_host($paramas, $id);
           $datas = Validate::up_many_file_slider();
           
+          if($size35 != 0 && $size35 != ""){
+            $paramas['quantity'] = $size35;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 35;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+          if($size36 != 0 && $size36 != ""){
+            $paramas['quantity'] = $size36;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 36;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size37 != 0 && $size37 != ""){
+            $paramas['quantity'] = $size37;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 37;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size38 != 0 && $size38 != ""){
+            $paramas['quantity'] = $size38;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 38;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size39 != 0 && $size39 != ""){
+            $paramas['quantity'] = $size39;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 39;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size40 != 0 && $size40 != ""){
+            $paramas['quantity'] = $size40;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 40;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size41 != 0 && $size41 != ""){
+            $paramas['quantity'] = $size41;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 41;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size42 != 0 && $size42 != ""){
+            $paramas['quantity'] = $size42;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 42;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size43 != 0 && $size43 != ""){
+            $paramas['quantity'] = $size43;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 43;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size44 != 0 && $size44 != ""){
+            $paramas['quantity'] = $size44;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 44;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size45 != 0 && $size45 != ""){
+            $paramas['quantity'] = $size45;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 45;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size46 != 0 && $size46 != ""){
+            $paramas['quantity'] = $size46;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 46;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+
+
+
           if (isset($datas['error']['sucssec']) == 1) {
             unset($datas['error']);
           
@@ -244,9 +450,9 @@ class AdminController extends BaseController
           }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
-        } else {
-          $data['error'] = Validate::up_img()['error'];
-        }
+        // } else {
+        //   $data['error'] = Validate::up_img()['error'];
+        // }
       }
     }
     return $this->view("Admin.product_host.product_change", $data);
@@ -284,33 +490,135 @@ class AdminController extends BaseController
     $data['product'] = $this->adminModel->change_product_new($id_product);
     $data['category'] = $this->adminModel->getAll_category();
     $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
+    $data['get_size'] = $this->adminModel->get_size($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
+
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
 
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
 
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+      if (Rexgex::regex_number($price) 
+      || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ){
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
       } else {
         $dt = Validate::up_img();
-        if (isset($dt['error']['sucssec']) == 1) {
+        // if (isset($dt['error']['sucssec']) == 1) {
           $paramas = [];
           $paramas['names'] = $nameproduct;
           $paramas['images'] = $dt['error']['name_file'];
           $paramas['pirce'] = $price;
           $paramas['details'] = $namdescriptione;
-          $paramas['amount'] = $amount;
+          $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_new($paramas, $id);
           $datas = Validate::up_many_file_slider();
+
+
+          if($size35 != 0 && $size35 != ""){
+            $paramas['quantity'] = $size35;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 35;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+          if($size36 != 0 && $size36 != ""){
+            $paramas['quantity'] = $size36;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 36;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size37 != 0 && $size37 != ""){
+            $paramas['quantity'] = $size37;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 37;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size38 != 0 && $size38 != ""){
+            $paramas['quantity'] = $size38;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 38;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size39 != 0 && $size39 != ""){
+            $paramas['quantity'] = $size39;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 39;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size40 != 0 && $size40 != ""){
+            $paramas['quantity'] = $size40;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 40;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size41 != 0 && $size41 != ""){
+            $paramas['quantity'] = $size41;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 41;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size42 != 0 && $size42 != ""){
+            $paramas['quantity'] = $size42;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 42;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size43 != 0 && $size43 != ""){
+            $paramas['quantity'] = $size43;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 43;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size44 != 0 && $size44 != ""){
+            $paramas['quantity'] = $size44;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 44;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size45 != 0 && $size45 != ""){
+            $paramas['quantity'] = $size45;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 45;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size46 != 0 && $size46 != ""){
+            $paramas['quantity'] = $size46;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 46;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+
+
+
           if (isset($datas['error']['sucssec']) == 1) {
             unset($datas['error']);
 
@@ -321,9 +629,9 @@ class AdminController extends BaseController
           }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
-        } else {
-          $data['error'] = Validate::up_img()['error'];
-        }
+        // } else {
+        //   $data['error'] = Validate::up_img()['error'];
+        // }
       }
     }
     return $this->view("Admin.product_new.product_new_change", $data);
@@ -369,34 +677,134 @@ class AdminController extends BaseController
     $data['product'] = $this->adminModel->change_product_new($id_product);
     $data['category'] = $this->adminModel->getAll_category();
     $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
-
+    $data['get_size'] = $this->adminModel->get_size($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
+    
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
 
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
 
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == ""  || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+      if (Rexgex::regex_number($price) 
+      || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ){
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
       } else {
         $dt = Validate::up_img();
-        if (isset($dt['error']['sucssec']) == 1) {
+        // if (isset($dt['error']['sucssec']) == 1) {
           $paramas = [];
           $paramas['names'] = $nameproduct;
           $paramas['images'] = $dt['error']['name_file'];
           $paramas['pirce'] = $price;
           $paramas['details'] = $namdescriptione;
-          $paramas['amount'] = $amount;
+          $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_sale($paramas, $id);
           $datas = Validate::up_many_file_slider();
+
+
+          if($size35 != 0 && $size35 != ""){
+            $paramas['quantity'] = $size35;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 35;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+          if($size36 != 0 && $size36 != ""){
+            $paramas['quantity'] = $size36;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 36;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size37 != 0 && $size37 != ""){
+            $paramas['quantity'] = $size37;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 37;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size38 != 0 && $size38 != ""){
+            $paramas['quantity'] = $size38;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 38;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size39 != 0 && $size39 != ""){
+            $paramas['quantity'] = $size39;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 39;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size40 != 0 && $size40 != ""){
+            $paramas['quantity'] = $size40;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 40;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size41 != 0 && $size41 != ""){
+            $paramas['quantity'] = $size41;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 41;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size42 != 0 && $size42 != ""){
+            $paramas['quantity'] = $size42;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 42;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size43 != 0 && $size43 != ""){
+            $paramas['quantity'] = $size43;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 43;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size44 != 0 && $size44 != ""){
+            $paramas['quantity'] = $size44;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 44;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size45 != 0 && $size45 != ""){
+            $paramas['quantity'] = $size45;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 45;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size46 != 0 && $size46 != ""){
+            $paramas['quantity'] = $size46;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 46;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+
+
           if (isset($datas['error']['sucssec']) == 1) {
             unset($datas['error']);
 
@@ -407,9 +815,9 @@ class AdminController extends BaseController
           }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
-        } else {
-          $data['error'] = Validate::up_img()['error'];
-        }
+        // } else {
+        //   $data['error'] = Validate::up_img()['error'];
+        // }
       }
     }
     return $this->view("Admin.product_sale.product_sale_change", $data);
@@ -455,34 +863,133 @@ class AdminController extends BaseController
     $data['product'] = $this->adminModel->change_product_suggestion($id_product);
     $data['category'] = $this->adminModel->getAll_category();
     $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
-
+    $data['get_size'] = $this->adminModel->get_size($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
 
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
 
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
-      if (Rexgex::regex_number($price) || Rexgex::regex_number($amount)) {
+      if (Rexgex::regex_number($price) 
+      || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ){
         $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
       } else {
         $dt = Validate::up_img();
-        if (isset($dt['error']['sucssec']) == 1) {
+        // if (isset($dt['error']['sucssec']) == 1) {
           $paramas = [];
           $paramas['names'] = $nameproduct;
           $paramas['images'] = $dt['error']['name_file'];
           $paramas['pirce'] = $price;
           $paramas['details'] = $namdescriptione;
-          $paramas['amount'] = $amount;
+          $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
           $paramas['product_id'] = $category;
           $id = $id_product;
           $insert = $this->adminModel->update_product_suggestion($paramas, $id);
           $datas = Validate::up_many_file_slider();
+
+
+          if($size35 != 0 && $size35 != ""){
+            $paramas['quantity'] = $size35;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 35;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+          if($size36 != 0 && $size36 != ""){
+            $paramas['quantity'] = $size36;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 36;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size37 != 0 && $size37 != ""){
+            $paramas['quantity'] = $size37;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 37;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size38 != 0 && $size38 != ""){
+            $paramas['quantity'] = $size38;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 38;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size39 != 0 && $size39 != ""){
+            $paramas['quantity'] = $size39;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 39;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size40 != 0 && $size40 != ""){
+            $paramas['quantity'] = $size40;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 40;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size41 != 0 && $size41 != ""){
+            $paramas['quantity'] = $size41;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 41;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size42 != 0 && $size42 != ""){
+            $paramas['quantity'] = $size42;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 42;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size43 != 0 && $size43 != ""){
+            $paramas['quantity'] = $size43;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 43;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size44 != 0 && $size44 != ""){
+            $paramas['quantity'] = $size44;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 44;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size45 != 0 && $size45 != ""){
+            $paramas['quantity'] = $size45;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 45;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+           if($size46 != 0 && $size46 != ""){
+            $paramas['quantity'] = $size46;
+            $paramas['id_product'] = $id_product;
+            $paramas['size'] = 46;
+            $insert = $this->adminModel->update_product_size($paramas);
+          }
+
+
           if (isset($datas['error']['sucssec']) == 1) {
             unset($datas['error']);
 
@@ -493,9 +1000,9 @@ class AdminController extends BaseController
           }
           $data['error'] = "Sửa Sản Phẩm Thành Công !";
           Rexgex::switch_data($category);
-        } else {
-          $data['error'] = Validate::up_img()['error'];
-        }
+        // } else {
+        //   $data['error'] = Validate::up_img()['error'];
+        // }
       }
     }
     return $this->view("Admin.product_suggestion.product_suggestion_change", $data);
@@ -537,31 +1044,132 @@ class AdminController extends BaseController
     $data['product'] = $this->adminModel->change_product_oder($id_product);
     $data['category'] = $this->adminModel->getAll_category();
         $data['get_slider'] = $this->adminModel->get_slider_category($id_product);
-
+        $data['get_size'] = $this->adminModel->get_size($id_product);
     $fileupload = isset($_FILES['file']) ? $_FILES['file'] : "";
     $nameproduct = isset($_POST['names']) ? $_POST['names'] : "";
     $price = isset($_POST['pirce']) ? $_POST['pirce'] : "";
     $category = isset($_POST['product_id']) ? $_POST['product_id'] : "";
-    $amount = isset($_POST['amount']) ? $_POST['amount'] : "";
     $namdescriptione = isset($_POST['details']) ? $_POST['details'] : "";
 
+    $size35 = isset($_POST['size35']) ? $_POST['size35'] : 0;
+    $size36 = isset($_POST['size36']) ? $_POST['size36'] : 0;
+    $size37 = isset($_POST['size37']) ? $_POST['size37'] : 0;
+    $size38 = isset($_POST['size38']) ? $_POST['size38'] : 0;
+    $size39 = isset($_POST['size39']) ? $_POST['size39'] : 0;
+    $size40 = isset($_POST['size40']) ? $_POST['size40'] : 0;
+    $size41 = isset($_POST['size41']) ? $_POST['size41'] : 0;
+    $size42 = isset($_POST['size42']) ? $_POST['size42'] : 0;
+    $size43 = isset($_POST['size43']) ? $_POST['size43'] : 0;
+    $size44 = isset($_POST['size44']) ? $_POST['size44'] : 0;
+    $size45 = isset($_POST['size45']) ? $_POST['size45'] : 0;
+    $size46 = isset($_POST['size46']) ? $_POST['size46'] : 0;
 
-    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $amount == "" || $namdescriptione == "") {
+    if ($nameproduct == "" || $fileupload == "" || $price == "" || $category == "" || $namdescriptione == "") {
       $data['error'] = "Thiếu Thông Tin Sản Phẩm";
       // echo 1;
     } else {
+      if (Rexgex::regex_number($price) 
+      || Rexgex::regex_number($size35)
+      || Rexgex::regex_number($size36)
+      || Rexgex::regex_number($size37)
+      || Rexgex::regex_number($size38)
+      || Rexgex::regex_number($size39)
+      || Rexgex::regex_number($size40)
+      || Rexgex::regex_number($size41)
+      || Rexgex::regex_number($size42)
+      || Rexgex::regex_number($size43)
+      || Rexgex::regex_number($size44)
+      || Rexgex::regex_number($size45)
+      || Rexgex::regex_number($size46) ){
+        $data['error'] = "Số Lượng Sản Phẩm Và Giá Sản Phẩm Chỉ Được Nhập Số !";
+      } else {
       $dt = Validate::up_img();
-      if (isset($dt['error']['sucssec']) == 1) {
+      // if (isset($dt['error']['sucssec']) == 1) {
         $paramas = [];
         $paramas['names'] = $nameproduct;
         $paramas['images'] = $dt['error']['name_file'];
         $paramas['pirce'] = $price;
         $paramas['details'] = $namdescriptione;
-        $paramas['amount'] = $amount;
+        $paramas['amount'] = $size35+$size36+$size37+$size38+$size39+$size40+$size41+$size42+$size43+$size44+$size45+$size46;
         $paramas['product_id'] = $category;
         $id = $id_product;
         $insert = $this->adminModel->update_product_oder($paramas, $id);
         $datas = Validate::up_many_file_slider();
+
+        if($size35 != 0 && $size35 != ""){
+          $paramas['quantity'] = $size35;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 35;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+        if($size36 != 0 && $size36 != ""){
+          $paramas['quantity'] = $size36;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 36;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size37 != 0 && $size37 != ""){
+          $paramas['quantity'] = $size37;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 37;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size38 != 0 && $size38 != ""){
+          $paramas['quantity'] = $size38;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 38;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size39 != 0 && $size39 != ""){
+          $paramas['quantity'] = $size39;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 39;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size40 != 0 && $size40 != ""){
+          $paramas['quantity'] = $size40;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 40;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size41 != 0 && $size41 != ""){
+          $paramas['quantity'] = $size41;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 41;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size42 != 0 && $size42 != ""){
+          $paramas['quantity'] = $size42;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 42;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size43 != 0 && $size43 != ""){
+          $paramas['quantity'] = $size43;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 43;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size44 != 0 && $size44 != ""){
+          $paramas['quantity'] = $size44;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 44;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size45 != 0 && $size45 != ""){
+          $paramas['quantity'] = $size45;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 45;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+         if($size46 != 0 && $size46 != ""){
+          $paramas['quantity'] = $size46;
+          $paramas['id_product'] = $id_product;
+          $paramas['size'] = 46;
+          $insert = $this->adminModel->update_product_size($paramas);
+        }
+
+
         if (isset($datas['error']['sucssec']) == 1) {
           unset($datas['error']);
 
@@ -572,8 +1180,9 @@ class AdminController extends BaseController
         }
         $data['error'] = "Sửa Sản Phẩm Thành Công !";
         Rexgex::switch_data($category);
-      } else {
-        $data['error'] = Validate::up_img()['error'];
+      // } else {
+      //   $data['error'] = Validate::up_img()['error'];
+      // }
       }
     }
     return $this->view("Admin.product_order.product_oder_change", $data);
@@ -707,6 +1316,7 @@ class AdminController extends BaseController
     $id = isset($_POST['id']) ? $_POST['id'] : "";
     $id_product = isset($_POST['id_product']) ? $_POST['id_product'] : "";
     $quantily = isset($_POST['quantily']) ? $_POST['quantily'] : "";
+    $id_size = isset($_POST['id_size']) ? $_POST['id_size'] : "";
 
     $data = $this->productModel->Product_to_id($id_product);
     $soluong = 1;
@@ -715,6 +1325,14 @@ class AdminController extends BaseController
       $soluong = $soluong - $quantily;
       $data = $this->productModel->Update_product_upto_soluong($id_product, $soluong);
     }
+    $datasize = $this->productModel->Product_size_to_id($id_size);
+    $soluong = 1;
+    foreach ($datasize as $sp) {
+      $soluong = $sp["quantity"];
+      $soluong = $soluong - $quantily;
+      $datasize = $this->productModel->Update_product_size_upto_soluong($id_size, $soluong);
+    }
+
     $data = $this->productModel->Update_transaction_data_to_id_Xac_nhan($id);
   }
   public function List_DonMua_dahuy()

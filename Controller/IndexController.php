@@ -573,9 +573,10 @@ class IndexController extends BaseController
             
             $id_user = isset($_GET['id_user'])?$_GET['id_user']:"";
             $id_product = isset($_GET['id_product'])?$_GET['id_product']:"";
+            $id_size = isset($_GET['id_size'])?$_GET['id_size']:"";
 
 
-            $check_id_product = $this->userModel->Select_id_user_order($id_user,$id_product);
+            $check_id_product = $this->userModel->Select_id_user_order($id_user,$id_product,$id_size);
             echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
                  
             
@@ -591,21 +592,23 @@ class IndexController extends BaseController
     
             $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
             $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+            $id_size = isset($_POST['id_size'])?$_POST['id_size']:"";
             $quantily = isset($_POST['quantily'])?$_POST['quantily']:"";
 
 
-            if ($id_user == "" || $id_product == "" || $quantily == "") {
+            if ($id_user == "" || $id_product == "" || $quantily == "" || $id_size =="") {
                 $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
                 echo json_encode($errorNull);
             } else {
-                $paramas['id_user'] = $id_user;
+                    $paramas['id_user'] = $id_user;
                     $paramas['id_product'] = $id_product;
+                    $paramas['id_size'] = $id_size;
                     $paramas['quantily'] = $quantily;
                $check_id_product = $this->userModel->add_user_order($paramas);
                 echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
             }     
 
-            echo json_encode($check_id_product, JSON_NUMERIC_CHECK);
+        
         } catch (Exception $e) {
             $error['errors'] = "Lỗi các trường không hợp lệ !";
             echo json_encode($error);
@@ -643,13 +646,15 @@ class IndexController extends BaseController
             
             $id_user = isset($_POST['id_user'])?$_POST['id_user']:"";
             $id_product = isset($_POST['id_product'])?$_POST['id_product']:"";
+            $id_size = isset($_POST['id_size'])?$_POST['id_size']:"";
 
-             if ($id_user == "" || $id_product == "") {
+             if ($id_user == "" || $id_product == "" || $id_size == "") {
                 $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
                 echo json_encode($errorNull);
             } else {
                 $paramas['id_user'] = $id_user;
                 $paramas['id_product'] = $id_product;
+                $paramas['id_size'] = $id_size;
 
                $check_id_product = $this->userModel->delete_id_product_user_order($paramas);
                 echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
@@ -671,6 +676,7 @@ class IndexController extends BaseController
             $name = isset($_POST['name'])?$_POST['name']:"";
             $address = isset($_POST['address'])?$_POST['address']:"";
             $phone = isset($_POST['phone'])?$_POST['phone']:"";
+            $id_size = isset($_POST['id_size'])?$_POST['id_size']:"";
 
              if ($id_user == "" || $id_product == "") {
                 $errorNull['errors'] = "Lỗi trường thông tin đẩy lên !";
@@ -682,6 +688,7 @@ class IndexController extends BaseController
                 $paramas['name'] = $name;
                 $paramas['address'] = $address;
                 $paramas['phone'] = $phone;
+                $paramas['id_size'] = $id_size;
 
                $check_id_product = $this->userModel->insert_transaction_data($paramas);
                 echo json_encode($check_id_product,JSON_NUMERIC_CHECK);     
@@ -795,7 +802,7 @@ class IndexController extends BaseController
     {
         $total_records = $this->productModel->count_total_records();
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $name = isset($_GET['name']) ? $_GET['name'] : 1;
+        $postname = isset($_GET['name']) ? $_GET['name'] : 1;
         $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : 1;
         $limit = 5;
         // BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
@@ -808,11 +815,20 @@ class IndexController extends BaseController
         } else if ($current_page < 1) {
             $current_page = 1;
         }
-
+        $tachname = explode(" ", $postname);
+        $name =  $tachname[0];
         // Tìm Start
         $start = ($current_page - 1) * $limit;
         $productModel = $this->productModel->Select_product_tuong_tu($start, $limit, $name, $id_product);
         // var_dump($slider);
         echo json_encode($productModel, JSON_NUMERIC_CHECK);
     }
+    public function Select_product_size()
+    {
+        $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : "";
+        $productModel = $this->productModel->Select_product_size($id_product);
+        // var_dump($slider);
+        echo json_encode($productModel, JSON_NUMERIC_CHECK);
+    }
+    
 }

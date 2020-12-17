@@ -67,18 +67,19 @@
                   if (isset($error)) {
 
                     echo   '<div class="alert alert-danger">
-   <strong>'
+                              <strong>'
                       . $error . '</strong>
-</div>';
+                            </div>';
                   }
-
+                  echo json_encode($product);
                   ?>
                   <!--Body-->
 
                   <form action="" method="post" enctype="multipart/form-data">
+                  <b>Tên sản phẩm</b>
                     <div class="form-group">
                       <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="names" placeholder="<?php echo $product[0]['name'] ?>">
+                        <input type="text" class="form-control" name="names" value="<?php echo $product[0]['name'] ?>">
                       </div>
                     </div>
                     <b>Ảnh Chính</b>
@@ -103,12 +104,31 @@
                       }
                       ?>
 
-
                     </div>
+                    <b>Số lượng : <?php echo $product[0]['amount'] ?></b>
                     <div class="form-group">
                       <div class="input-group mb-2">
-
-                        <input type="text" class="form-control" id="nombre" name="amount" placeholder="Số Lượng <?php echo $product[0]['amount'] ?>">
+                      <table>
+                      <tr>
+                      <?php
+                      foreach ($get_size as $value) {
+                      
+                        echo '<th><b>size'.$value['size'].'</b></th> ';
+                       
+                      }
+                      ?>
+                      </tr>
+                      <tr>
+                      <?php
+                      foreach ($get_size as $value) {
+                      
+                      echo '<td><input type="text" class="form-control" id="nombre" name="size'.$value['size'].'" value="'.$value['quantity'].'"></td>';
+                      
+                    }
+                    ?>
+                    <tr>
+                      </table>
+               
                       </div>
                     </div>
                     <div class="form-group">
@@ -126,14 +146,14 @@
                     <div class="form-group">
                       <div class="input-group mb-2">
 
-                        <input type="text" class="form-control" id="nombre" name="pirce" placeholder="Giá Sản Phẩm <?php echo $product[0]['pirce'] ?> Đ">
+                        <input type="text" class="form-control" id="nombre" name="pirce" value=<?php echo $product[0]['pirce'] ?> Đ">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <div class="input-group mb-2">
 
-                        <textarea class="form-control" name="details" placeholder="<?php echo $product[0]['details'] ?>"></textarea>
+                        <textarea class="form-control" name="details" value="<?php echo $product[0]['details'] ?>"><?php echo $product[0]['details'] ?></textarea>
                       </div>
                     </div>
 
