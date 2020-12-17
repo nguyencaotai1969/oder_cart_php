@@ -84,9 +84,20 @@
                       <input type="file" name='file' class="form-control" multiple>
                     </div>
                     <div class="form-group">
+                    <b>Số lượng</b>
                       <div class="input-group mb-2">
-
-                        <input type="text" class="form-control" id="nombre" name="amount" placeholder="Số Lượng">
+                      <input type="text" class="form-control" id="nombre" name="size35" placeholder="Size 35">
+                      <input type="text" class="form-control" id="nombre" name="size36" placeholder="Size 36">
+                      <input type="text" class="form-control" id="nombre" name="size37" placeholder="Size 37">
+                      <input type="text" class="form-control" id="nombre" name="size38" placeholder="Size 38">
+                      <input type="text" class="form-control" id="nombre" name="size39" placeholder="Size 39">
+                      <input type="text" class="form-control" id="nombre" name="size40" placeholder="Size 40">
+                      <input type="text" class="form-control" id="nombre" name="size41" placeholder="Size 41">
+                      <input type="text" class="form-control" id="nombre" name="size42" placeholder="Size 42">
+                      <input type="text" class="form-control" id="nombre" name="size43" placeholder="Size 43">
+                      <input type="text" class="form-control" id="nombre" name="size44" placeholder="Size 44">
+                      <input type="text" class="form-control" id="nombre" name="size45" placeholder="Size 45">
+                      <input type="text" class="form-control" id="nombre" name="size46" placeholder="Size 46">
                       </div>
                     </div>
                     <b>Ảnh Chi Tiết</b>
