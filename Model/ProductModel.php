@@ -204,10 +204,11 @@ class ProductModel extends Database
     public function Select_transaction_data_to_id_user_Cho_Xac_Nhan($id_user)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE id_user = $id_user AND status = 0");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -245,10 +246,11 @@ class ProductModel extends Database
     public function Select_transaction_data_to_id_user_Da_Huy($id_user)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE id_user = $id_user AND status = 3 ");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -270,10 +272,11 @@ class ProductModel extends Database
     public function Select_transaction_data_to_id_user_Da_Mua($id_user)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE id_user = $id_user AND status = 2");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -295,10 +298,11 @@ class ProductModel extends Database
     public function Select_transaction_data_to_id_user_Dang_Giao($id_user)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE id_user = $id_user AND status = 1");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -320,10 +324,11 @@ class ProductModel extends Database
     public function Select_ALL_transaction_data_Cho_Xac_Nhan($start, $limit)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE status = 0 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -385,7 +390,7 @@ class ProductModel extends Database
     //  $data = [];
         if ( $result >0) {
                 $data =[
-                    "user_oder" =>"Hủy đơn hàng thành công"];
+                    "user_oder" =>"Xác nhận đơn hàng thành công"];
             return $data;
           } else {
                 return $data =[
@@ -413,10 +418,11 @@ class ProductModel extends Database
     public function Select_ALL_transaction_data_Da_Huy($start, $limit)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE  status = 3 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -438,10 +444,11 @@ class ProductModel extends Database
     public function Select_ALL_transaction_data_Dang_giao($start, $limit)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE  status = 1 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -463,10 +470,11 @@ class ProductModel extends Database
     public function Select_ALL_transaction_data_Da_Mua($start, $limit)
     {
         $conn = $this->conn();
-        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product_status.name AS name_status 
+        $result = mysqli_query($conn, "SELECT transaction_data.*,product.name AS name_product,product.image,product.pirce,product.details,product.product_id,product_status.name AS name_status,size_product.size 
         FROM `transaction_data` 
         INNER JOIN product_status ON transaction_data.status = product_status.id 
-        INNER JOIN product ON transaction_data.id_product = product.id
+        INNER JOIN product ON transaction_data.id_product = product.id 
+        INNER JOIN size_product ON transaction_data.id_size = size_product.id 
         WHERE  status = 2 ORDER BY transaction_data.id DESC LIMIT  $start, $limit");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -531,8 +539,8 @@ class ProductModel extends Database
     public function  Select_product_dong_gia($price, $id_product)
     {
         $conn = $this->conn();
-        $min = $price-10000;
-        $max = $price+10000;
+        $min = $price-100000;
+        $max = $price+100000;
         $result = mysqli_query($conn, "SELECT * FROM product where pirce > $min AND pirce < $max AND id != $id_product");
         $data = [];
         if ($result && $result->num_rows > 0) {
@@ -572,4 +580,63 @@ class ProductModel extends Database
             ];
         }
     }
+    public function   Select_product_size($id_product)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM `size_product` WHERE id_product = $id_product");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    public function Product_size_to_id($id_size)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "SELECT * FROM `size_product` WHERE id = $id_size");
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                // echo "<pre>";
+                // var_dump($row);
+
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+    public function Update_product_size_upto_soluong($id_size,$soluong)
+    {
+        $conn = $this->conn();
+        $result = mysqli_query($conn, "UPDATE `size_product` SET `quantity`= $soluong WHERE id = $id_size");
+        $data = [];
+        if ( $result >0) {
+            $data =[
+                "user_oder" =>"Hủy đơn hàng thành công"];
+        return $data;
+        } else {
+            return $data = [
+                "error" => "Khong tim thay ket qua!"
+            ];
+        }
+    }
+
+   
 }

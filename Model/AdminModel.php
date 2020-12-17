@@ -160,6 +160,22 @@ class AdminModel extends Database
     }
     return $data;
   }
+  public function get_size($id)
+  {
+    $conn = $this->conn();
+    $select = "SELECT * FROM `size_product` WHERE id_product =  '$id'";
+    $result =  $conn->query($select);
+    $data = [];
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+        // echo "<pre>";
+        // var_dump($row);
+        $data[] = $row;
+      }
+    }
+    return $data;
+  }
   public function getAll_User()
   {
     $conn = $this->conn();
@@ -305,5 +321,18 @@ class AdminModel extends Database
     $conn = $this->conn();
     $DELETE = "DELETE FROM `product` WHERE `product`.`id` = $id";
     $conn->query($DELETE) === true;
+  }
+  
+  public function insert_product_size($paramass)
+  {
+    $conn = $this->conn();
+    $insert = "INSERT INTO `size_product`( `id_product`, `size`, `quantity`) VALUES ({$paramass['id_product']},{$paramass['size']},{$paramass['quantity']} ) ";
+    $conn->query($insert) === true;
+  }
+  public function update_product_size($paramass)
+  {
+    $conn = $this->conn();
+    $insert = "UPDATE `size_product` SET `quantity`= {$paramass['quantity']} WHERE id_product =  {$paramass['id_product']} AND size = {$paramass['size']} ";
+    $conn->query($insert) === true;
   }
 }

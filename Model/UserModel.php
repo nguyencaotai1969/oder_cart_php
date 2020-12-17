@@ -55,7 +55,7 @@ public function check_email_isset_regiter($email){
    
 public function user_Oder($id_user){
     $conn = $this->conn();
-    $select = "SELECT * FROM product JOIN user_order on product.id = user_order.id_product WHERE user_order.id_user =$id_user";
+    $select = "SELECT * FROM product JOIN user_order on product.id = user_order.id_product JOIN size_product ON user_order.id_size = size_product.id WHERE user_order.id_user = $id_user";
     $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result &&  $result->num_rows >0) {
@@ -156,10 +156,12 @@ public function change_phone_profile_user($paramas,$id){
 
 
     //Select user_order theo id
-    public function  Select_id_user_order($id_user,$id_product){
+    public function  Select_id_user_order($id_user,$id_product,$id_size){
         $conn = $this->conn();
-        $select = "SELECT user_order.*,product.name,product.image,product.pirce,product.details,product.amount,product.product_id FROM `user_order` 
-        INNER JOIN product ON user_order.id_product = product.id WHERE id_user = $id_user AND id_product = $id_product";
+        $select = "SELECT user_order.*,product.name,product.image,product.pirce,product.details,product.amount,product.product_id,size_product.quantity
+        FROM `user_order`
+        INNER JOIN product ON user_order.id_product = product.id
+        INNER JOIN size_product ON user_order.id_size = size_product.id WHERE id_user = $id_user AND  user_order.id_product = $id_product AND user_order.id_size = $id_size ";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result &&  $result->num_rows >0) {
@@ -180,7 +182,8 @@ public function change_phone_profile_user($paramas,$id){
     //thêm vào user_order
     public function  add_user_order($paramas){
         $conn = $this->conn();
-        $select = "INSERT INTO `user_order`(`id_user`, `id_product`, `amount_user_oder`) VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantily']}')";
+        $select = "INSERT INTO `user_order`(`id_user`, `id_product`, `id_size`, `amount_user_oder`) 
+        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['id_size']}','{$paramas['quantily']}')";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result >0) {
@@ -214,7 +217,7 @@ public function change_phone_profile_user($paramas,$id){
     // xóa theo id sản phẩm trong user_cart
     public function delete_id_product_user_order($paramas){
             $conn = $this->conn();
-            $select = "DELETE FROM `user_order` WHERE id_user = '{$paramas['id_user']}' AND id_product = '{$paramas['id_product']}' ";
+            $select = "DELETE FROM `user_order` WHERE id_user = '{$paramas['id_user']}' AND id_product = '{$paramas['id_product']}' AND id_size = '{$paramas['id_size']}'";
             $result = mysqli_query($conn,$select);
         //  $data = [];
             if ( $result >0) {
@@ -234,9 +237,9 @@ public function change_phone_profile_user($paramas,$id){
         $date = getdate();
         $update =$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
     
-        $select = "INSERT INTO `transaction_data`(`id_user`, `id_product`, `quantity`, `date` ,`name`, `address`, `phone`) 
-        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantity']}','2020-12-24 14:21:29','{$paramas['name']}',
-        '{$paramas['address']}','{$paramas['phone']}') ";
+        $select = "INSERT INTO `transaction_data`(`id_user`, `id_product`, `quantity`, `date` ,`name`, `address`, `phone`,`id_size`) 
+        VALUES ('{$paramas['id_user']}','{$paramas['id_product']}','{$paramas['quantity']}','$update','{$paramas['name']}',
+        '{$paramas['address']}','{$paramas['phone']}','{$paramas['id_size']}') ";
         $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result >0) {

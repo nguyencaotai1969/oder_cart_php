@@ -51,15 +51,14 @@
         <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
          <thead>
           <tr role="row">
-           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">STT</th>
-           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id user</th>
-           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id product</th>
-           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 170.2px;" aria-label="Office: activate to sort column ascending">tên người đặt</th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">STT</th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 150.2px;" aria-label="Office: activate to sort column ascending">tên người đặt</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 200.2px;" aria-label="Age: activate to sort column ascending">Địa chỉ </th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">số điện thoại</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 150.2px;" aria-label="Age: activate to sort column ascending">tên sản phẩm</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 10.2px;" aria-label="Age: activate to sort column ascending">số lượng </th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 100.2px;" aria-label="Age: activate to sort column ascending">giá </th>
+           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 100.2px;" aria-label="Age: activate to sort column ascending">size </th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">Ảnh </th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 125.2px;" aria-label="Age: activate to sort column ascending">trạng thái</th>
            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 170.2px;" aria-label="Start date: activate to sort column ascending">EDIT</th>
@@ -72,14 +71,13 @@
           foreach ($donmua as $sp) {
             if(!empty($sp['id'])){
            echo "<tr role='row' class='odd'><td tabindex='0' class='sorting_1'>" . $i++ . "</td>";
-           echo "<td>" . $sp['id_user'] . "</td>";
-           echo "<td>" . $sp['id_product'] . "</td>";
            echo "<td>" . $sp['name'] . "</td>";
            echo "<td>" . $sp['address'] . "</td>";
            echo "<td>" . $sp['phone'] . "</td>";
            echo "<td>" . $sp['name_product'] . "</td>";
            echo "<td>" . $sp['quantity'] . "</td>";
            echo "<td>" . $sp['pirce'] . "</td>";
+           echo "<td>" . $sp['size'] . "</td>";
            echo "<td><img width='100px' height='100px' src=" . 'img/' . $sp['image'] . "></td>";
            echo "<td>" . $sp['name_status'] . "</td>";
            echo "<td>";
