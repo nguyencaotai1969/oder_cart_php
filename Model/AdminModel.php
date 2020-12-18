@@ -10,7 +10,199 @@ class AdminModel extends Database
   }
   public function Revenue(){
     $conn = $this->conn();
-    $result = mysqli_query($conn, "SELECT * FROM transaction_data JOIN product ON transaction_data.id_product=product.id");
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-12-01' and '2020-12-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueXI(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-11-01' and '2020-11-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueX(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-10-01' and '2020-10-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueIX(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-09-01' and '2020-09-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueVIII(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-08-01' and '2020-08-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueVII(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-07-01' and '2020-07-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueVI(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-06-01' and '2020-06-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueV(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-05-01' and '2020-05-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueIV(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-04-01' and '2020-04-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueIII(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-03-01' and '2020-03-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueII(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-02-01' and '2020-02-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function RevenueI(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data 
+    JOIN product ON transaction_data.id_product=product.id WHERE status = 2
+      AND transaction_data.date between '2020-01-01' and '2020-01-31' ");
+    $data = [];
+    if ($result && $result->num_rows > 0) {
+
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+
+        $data[] = $row;
+      }
+      return $data;
+    }
+  }
+  public function check(){
+    $conn = $this->conn();
+    $result = mysqli_query($conn, "SELECT * FROM transaction_data JOIN product ON transaction_data.id_product=product.id WHERE status = 0");
     $data = [];
     if ($result && $result->num_rows > 0) {
 

@@ -38,7 +38,77 @@ class AdminController extends BaseController
     }
     $data['sum'] = $sum;
 
+    $sumXI = 0;
+    foreach ($this->adminModel->RevenueXI() as $value) {
+      $sumXI += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumXI'] = $sumXI;
+
+    $sumX = 0;
+    foreach ($this->adminModel->RevenueX() as $value) {
+      $sumX += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumX'] = $sumX;
+
+    $sumIX = 0;
+    foreach ($this->adminModel->RevenueIX() as $value) {
+      $sumIX += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumIX'] = $sumIX;
+
+    $sumVIII = 0;
+    foreach ($this->adminModel->RevenueVIII() as $value) {
+      $sumVIII += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumVIII'] = $sumVIII;
+
+    $sumVII = 0;
+    foreach ($this->adminModel->RevenueVII() as $value) {
+      $sumVII += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumVII'] = $sumVII;
+
+    $sumVI = 0;
+    foreach ($this->adminModel->RevenueVI() as $value) {
+      $sumVI += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumVI'] = $sumVI;
+
+    $sumV = 0;
+    foreach ($this->adminModel->RevenueV() as $value) {
+      $sumV += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumV'] = $sumV;
+
+    $sumIV = 0;
+    foreach ($this->adminModel->RevenueIV() as $value) {
+      $sumIV += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumIV'] = $sumIV;
+
+    $sumIII = 0;
+    foreach ($this->adminModel->RevenueIII() as $value) {
+      $sumIII += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumIII'] = $sumIII;
+
+    $sumII = 0;
+    foreach ($this->adminModel->RevenueII() as $value) {
+      $sumII += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumII'] = $sumII;
+
+    $sumI = 0;
+    foreach ($this->adminModel->RevenueI() as $value) {
+      $sumI += $value['quantity'] * $value['pirce'];
+    }
+    $data['sumI'] = $sumI;
+
+    $data['product'] = $this->adminModel->Revenue();
+    $data['check'] = $this->adminModel->check();
+
     return $this->view("Admin.index", $data);
+    return $this->public("chart-area-demo.index", $data);
   }
   
   /// day la quan ly tin nhan =======================================================
