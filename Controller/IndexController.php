@@ -126,6 +126,7 @@ class IndexController extends BaseController
                             'full_name' => $data_user['full_name'],
                             'username' => $datalogin['username'],
                             'phone' => $data_user['Phone'],
+                            'address' => $data_user['address'],
                             'token' => $jsonwebtoken,
                         ];
 
@@ -289,6 +290,32 @@ class IndexController extends BaseController
                         echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
 
                         $user_data_oder = $this->userModel->change_phone_profile_user($paramas, $id_user);
+                    }
+                }
+            }else if (isset($_POST['address']) == true) {
+                $paramas['address'] = isset($_POST['address']) ? $_POST['address'] : "";
+
+                if ($paramas['address'] == "") {
+                    $error = [
+                        1 => 1,
+                        'errors' => "Thiếu Thông Tin",
+                    ];
+                    echo json_encode($error, JSON_NUMERIC_CHECK);
+                } else {
+                    if (Validate::validate_address($paramas['address']) == false) {
+                        $error = [
+                            1 => 1,
+                            'errors' => "Địa chỉ Không Hợp Lệ",
+                        ];
+                        echo json_encode($error, JSON_NUMERIC_CHECK);
+                    } else {
+                        $sucesfull = [
+                            1 => 2,
+                            'sucesfull' => "Cập nhật địa chỉ thành công !",
+                        ];
+                        echo json_encode($sucesfull, JSON_NUMERIC_CHECK);
+
+                        $user_data_oder = $this->userModel->change_address_profile_user($paramas, $id_user);
                     }
                 }
             } else if (isset($_POST['passwords']) == true) {
