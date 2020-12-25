@@ -38,7 +38,7 @@ public function check_email_isset_regiter($email){
                   }
    public function user_profile($id_user){
        $conn = $this->conn();
-    $select = "SELECT full_name,Phone,email,img FROM user where user.id =$id_user";
+    $select = "SELECT full_name,Phone,email,img,address FROM user where user.id =$id_user";
     $result = mysqli_query($conn,$select);
     //  $data = [];
         if ( $result &&  $result->num_rows >0) {
@@ -86,6 +86,14 @@ public function change_phone_profile_user($paramas,$id){
              $conn->query($UPDATE) === true;
 
 }
+    public function change_address_profile_user($paramas,$id){
+        $conn = $this->conn();
+
+    $UPDATE = "UPDATE `user` SET `address`='{$paramas['address']}'
+    WHERE `user`.`id` = {$id['id']}";
+    $conn->query($UPDATE) === true;
+
+    }
     public function change_phone_password_user($paramas,$id){
                     $conn = $this->conn();
 
