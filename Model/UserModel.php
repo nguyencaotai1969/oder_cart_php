@@ -150,8 +150,8 @@ public function change_phone_profile_user($paramas,$id){
     }
     public function register($paramas){
         $conn = $this->conn();
-        $insert_sql = "INSERT INTO `user`(`id`,`full_name`,`Phone`,`email`,`username`,`password`,`img`,`gid`) VALUES
-        (null,'{$paramas['fullname']}','{$paramas['phone']}','{$paramas['email']}','{$paramas['username']}','{$paramas['pass']}',DEFAULT,2)";
+        $insert_sql = "INSERT INTO `user`(`id`,`full_name`,`Phone`,`email`,`address`,`username`,`password`,`img`,`gid`) VALUES
+        (null,'{$paramas['fullname']}','{$paramas['phone']}','{$paramas['email']}',null,'{$paramas['username']}','{$paramas['pass']}',DEFAULT,2)";
          $conn->query($insert_sql) === true;
     } 
     public function finByid($id){

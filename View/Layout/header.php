@@ -103,7 +103,7 @@
     </h6>
     <a class="dropdown-item d-flex align-items-center" href="#">
      <div class="dropdown-list-image mr-3">
-      <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
+      <img class="rounded-circle" src="img/img1504030042.jpg" alt="">
       <div class="status-indicator bg-success"></div>
      </div>
      <div class="font-weight-bold">
@@ -154,7 +154,7 @@
   <!-- Nav Item - User Information -->
   <li class="nav-item dropdown no-arrow">
    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <img class="img-profile rounded-circle" src="img/user.png">
+    <img class="img-profile rounded-circle" src="img/img1504030042.jpg">
    </a>
    <!-- Dropdown - User Information -->
    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
