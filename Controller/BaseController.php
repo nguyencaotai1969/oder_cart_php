@@ -51,7 +51,8 @@ class BaseController{
         ,'Index.Select_product_dong_gia'
         , 'Index.Api_user_read_message'
         ,'Index.Select_product_tuong_tu'
-        ,'Index.Select_product_size'];
+        ,'Index.Select_product_size'
+        ,'Index.Check_address'];
         if(in_array($pms, $public_acl)) // nếu là chức năng public thì không cần kiểm tra
             return true;
         //2. Kiểm tra tài khoản đã đăng nhập hay chưa.
